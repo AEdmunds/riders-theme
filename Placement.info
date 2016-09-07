@@ -1,0 +1,124 @@
+<Placement>
+
+  <!--remove comments part form summary on blog post-->
+  <!--<Place Parts_Comments_Count="-"/>-->
+  
+  
+  <Match DisplayType="Detail">
+    <Place Fields_ImageUpload-MenuImage="-"/>
+    <Place Parts_Title="/BeforeMain1:5"/>
+    <Place Parts_ImageGallery="/BeforeMain2:5"/>
+    <Place Parts_Meta_Edit="Content:1.5"/>
+    <Place Parts_Localization_ContentTranslations="-"/>
+    <Place Fields_ImageUpload="-"/>
+  </Match>
+  
+  <!-- remove title from home page -->
+  <Match ContentType="Homepage">
+    <Place Parts_Title="-"/>
+  </Match>
+
+  <!--Insert the video and introduction fields in the page header part for alternate index pages--> 
+  <Match ContentType="AlternateIndexPage">
+    <Place Parts_Title="/BeforeMain1:5"/>
+    <Place Fields_Input-VideoUrl="/BeforeMain2:5"/>
+    <Place Parts_Introduction="/BeforeMain3:5"/>
+    <Match DispalyType="Details">
+      <Place Fields_Input-SubMenuHighlight="-" />
+    </Match>
+    <Match DispalyType="Summary">
+      <Place Fields_Input-SubMenuHighlight="-" />
+    </Match>
+  </Match>
+
+  <!--insert the promo fields in main content for country page-->
+  <Match ContentType="CountryProfile">
+    <Match DisplayType="Detail">
+      <Place Parts_Promo_Image="Content:0.5"/>
+      <Place Parts_Promo_Video="Content:0.5"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Fields_Common_Text="-" />
+      <Place Fields_Input="-" />
+      <Place Fields_Numeric="-" />
+    </Match>
+    <Match DispalyType="Details">
+      <Place Fields_Common_Text="-" />
+      <Place Fields_Input="-" />
+    </Match>
+  </Match>
+
+      <!--Move the document gallery below the impact data on our impact page -->
+    <Match Path="/what-we-do/our-impact">
+      <Place Parts_DocumentGallery="/TripelFirst:5"/>
+    </Match>
+  
+     <Match Path="/riders/what-we-do/our-impact">
+      <Place Parts_DocumentGallery="/TripelFirst:5"/>
+    </Match>
+    
+  <Match ContentType="Projection">
+    <Match DispalyType="Details">
+      <Place Fields_Common_Text="-" />
+      <Place Fields_Input="-" />
+      <Place Fields_ImageUpload="-"/>
+    </Match>
+    <Match DispalyType="Summary">
+      <Place Fields_Common_Text="-" />
+      <Place Fields_Input="-" />
+      <Place Fields_ImageUpload="-"/>
+    </Match>
+  </Match>
+
+   <!-- remvoe title from where we work page -->
+    <Match Path="/where-we-work">
+        <Place Parts_Title="-"/> 
+        <Match DisplayType="Deatils">
+            <Place Parts_Title="/BeforeMain1:5"/> 
+        </Match>
+    </Match>
+  
+    <Match Path="/riders/where-we-work">
+       <Place Parts_Title="-"/>  
+       <Match DisplayType="Deatils">
+            <Place Parts_Title="/BeforeMain1:5"/> 
+        </Match>
+    </Match>
+  
+  
+  <!--control rendering of image upload part in news article-->
+  <Match Path="/news-blog/news">
+    <Match DisplayType="Detail">
+      <Place Parts_ImageUpload="Content:1"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_ImageUpload="Content:1"/>
+    </Match>
+  </Match>
+ 
+  <Match Path="/riders/news-blog/news">
+    <Match DisplayType="Detail">
+      <Place Parts_ImageUpload="Content:1"/>
+    </Match>
+    <Match DisplayType="Summary">
+      <Place Parts_ImageUpload="Content:1"/>
+    </Match>
+  </Match>
+      
+  <Match ContentType="BlogPost">
+    <Match DisplayType="Detail">
+      <Place Parts_Title="-"/>
+      <Place Parts_Tags_ShowTags="-" />
+    </Match>
+  </Match>
+
+  
+  <Match DisplayType="Detail">
+    <Place Parts_ImageGallery="/BeforeMain2:5"/>
+    <Place Parts_DocumentGallery="/AfterContent:0.5" />
+  </Match>
+  
+  <Place Parts_DocumentGallery_Edit="Content:2.6"/>
+ 
+  
+</Placement>

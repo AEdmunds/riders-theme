@@ -1,0 +1,24 @@
+﻿@model dynamic
+
+<nav>
+    <ul class="breadcrumb">
+        <li class="first">
+            <a href="@Url.Content("~/")">Home</a>
+        </li>
+        <li class="selected">
+            <a href="@Url.Content(@"~/news-blog")">News &amp; Blog</a> 
+        </li>
+        <li class="selected">
+            @if (Model.Name == "News")
+            {
+                <a href="@Url.Content(@"~/news-blog/news")">News</a>
+            }
+            else
+            {
+                <a href="@Url.Content(@"~/news-blog/blog")">Blog</a>
+            }            
+        
+        </li>
+        <li class="selected last">@Model.Title</li>
+    </ul>
+</nav>

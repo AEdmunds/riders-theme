@@ -1,0 +1,35 @@
+﻿@using OrangeCheck.Utils
+
+@{
+    // Hack to stop menu items from showing in the wrong place
+    var contentItems = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Content.Items);
+    var applicationPath = Request.ApplicationPath;
+}
+
+@foreach (var contentItem in contentItems)
+{
+    if (contentItem.Metadata.Type == "Parts_MenuWidget")
+    {
+
+        var menuItems = (IList<dynamic>)Enumerable.Cast<dynamic>(contentItem.Menu.Items);
+        if (menuItems.Any())
+        {
+            string requestUrl = Request.Path.Replace(Request.ApplicationPath, string.Empty).TrimEnd('/').ToUpperInvariant();
+
+            if (Html.ContentItemInSubMenu(requestUrl, menuItems))
+            {
+                @Display(contentItem)
+            }
+        }
+
+    }
+    else
+    {
+        @Display(contentItem)
+    }
+    
+}
+
+ 
+
+

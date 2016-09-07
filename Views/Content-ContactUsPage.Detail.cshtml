@@ -1,0 +1,59 @@
+﻿@{
+
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+    
+    Script.Require("jQuery").AtHead();
+    Script.Require("google-map").AtHead();
+    
+    var email = Model.ContentItem.ContactUsPage.Email.Value;
+    var phone = Model.ContentItem.ContactUsPage.Phone.Value;
+    var fax = Model.ContentItem.ContactUsPage.Fax.Value;
+    var address = Model.ContentItem.ContactUsPage.Address.Value;
+    var formatedAddress = address.ToString().Replace(Environment.NewLine, "</br>");
+    var lat = Model.ContentItem.MapPart.Latitude;
+    var lng = Model.ContentItem.MapPart.Longitude;
+    
+
+    WorkContext.Layout.AfterContent.Add(New.ContactUsBlackBox(), "5");
+               
+}
+
+<div class="right contact">
+	<div class="column">
+		<h2>Email</h2>
+		<p>@email</p>
+		<h2>Phone</h2>
+		<p>@phone</p>
+		<h2>Fax</h2>
+		<p>@fax</p>
+	</div>
+	<div class="column">
+		<h2>Address</h2>
+		<p>
+			@Html.Raw(formatedAddress)
+		</p>
+	</div>
+    <div class="column span2">					
+        
+        <div id="map_canvas" style="display:block;width:100%; height:246px;margin-top:5px;"></div>
+       
+        <script type="text/javascript">
+
+            function initialize() {
+                var latlng = new google.maps.LatLng(@lat, @lng);
+                var myOptions = { zoom: 15, center: latlng, mapTypeId: google.maps.MapTypeId.ROADMAP };
+                var map = new google.maps.Map($("#map_canvas")[0], myOptions);
+                var marker = new google.maps.Marker({ position: latlng, title: "Project site" }); marker.setMap(map);
+            }
+
+            $(function () { initialize(); });
+        
+        </script>
+    </div>
+   
+</div>

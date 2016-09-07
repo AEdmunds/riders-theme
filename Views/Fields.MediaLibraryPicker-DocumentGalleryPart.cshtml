@@ -1,0 +1,13 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.MediaLibrary.Fields
+@using Orchard.Utility.Extensions;
+
+@{
+    var field = (MediaLibraryPickerField) Model.ContentField;
+    var mediaParts = field.MediaParts.ToList();
+}
+
+@if (mediaParts.Any()) { 
+    @Display(New.DocumentGallery(MediaParts:mediaParts))
+}
+

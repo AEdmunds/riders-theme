@@ -1,0 +1,96 @@
+﻿@using OrangeCheck.Utils
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.Utility.Extensions;
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+    
+    // var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+
+    var image = Model.ContentItem.BlogPost.Image; 
+    var date = string.Format("{0:dd MMMM, yyyy}", ((DateTime)Model.ContentItem.CommonPart.CreatedUtc));
+    var body = Model.ContentItem.BodyPart.Text;
+
+    if (body.StartsWith("<p>"))
+    {
+        body = "<p class='intro'>" + body.Substring(3);
+    }
+    else
+    {
+        body = "<p class='intro'>" + body;
+    }
+
+    if (!body.EndsWith("</p>"))
+    {
+        body = body + "</p>";
+    }
+
+    var newsTitle = Html.Raw(string.Format("<h1 class=\"ribbon\"><span>{0}</span></h1>", Model.Blog.Name));
+
+    
+    WorkContext.Layout.BeforeMain1.Add(New.NewsBlogBreadcrumb(Name: Model.Blog.Name, Title: title), "5");
+    
+    WorkContext.Layout.BeforeMain1.Add(newsTitle, "5");
+    
+    //Html.RegisterFeed(new { type = "comment", parent = slug }, "Comment feed");
+
+
+    if (Model.Blog.Name == "Blog")
+    {
+        WorkContext.Layout.AssideSecondTop.Add(New.BlogAuthor(Name: Model.ContentItem.ContentAuthorPart.AuthorName, Photo: Model.ContentItem.ContentAuthorPart.Photo), "5");
+    }
+
+
+}
+<div id="blog-list">
+   
+
+    <div class="column span3">
+    
+
+
+        @Display(Model.Header)
+ 
+        @if (Model.Blog.Name == "News" && image != null)
+        {
+            <div class="image-container hero">
+                @Display(New.ImageField(ImageField:image))
+                <div class="copy">
+                    <h2 class="ribbon large"><span>@title</span></h2>
+                    <h3 class="ribbon date"><span>@date</span></h3>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h2 class="ribbon large"><span>@title</span></h2>	
+            <h3 class="date">@date</h3>
+        }
+
+        @Html.Raw(body)
+
+        @*comments to go here *@
+        @if (Model.Blog.Name == "Blog")
+        {
+            @Display(ShapeHelper.Find((Shape)Model, "Parts_Comments"))
+        }
+        
+        
+        <div class="pagination border">
+            @if (Model.Blog.Name == "News")
+            {
+                <a href="@Url.Content(@"~/news-blog/news")" class="highlight">< View all news articles</a>
+            }
+            else
+            {
+                <a href="@Url.Content(@"~/news-blog/blog")" class="highlight">< View all blog articles</a>
+            }
+        </div>
+
+    </div>
+</div>
+

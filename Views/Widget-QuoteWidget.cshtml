@@ -1,0 +1,30 @@
+﻿@{
+
+    var quote = Model.ContentItem.QuotePart.Quote.Value;
+    var name = Model.ContentItem.QuotePart.Name.Value;
+    var title = Model.ContentItem.QuotePart.JobTitle.Value;
+
+    var imageField = Model.ContentItem.QuotePart.Photo;
+    
+}
+
+@if (imageField.ImageUrl != null)
+{
+    <div class="photo-quote">
+        @Display(New.ImageField(ImageField:imageField))
+        <blockquote>
+            <span class="quotes"></span>
+            <span>@quote</span>
+            <em>@name<br />@title</em>
+        </blockquote>
+    </div>
+}
+else
+{
+     <blockquote>
+	        <span class="quotes"></span>
+	        <span>@quote</span>
+            <em>@name<br />@title</em>
+        </blockquote>
+}
+

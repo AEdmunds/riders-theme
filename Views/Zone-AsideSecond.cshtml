@@ -1,0 +1,24 @@
+﻿@*
+
+- Removes extra div tag from rendered content
+- added the class zone to help in shape finding in dev mode. 
+
+*@
+
+@{
+    // ensure widget placement order is correct 
+    var contentItems = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Items);
+    var orderdContentItems = contentItems.OrderBy(x => x.ContentItem.WidgetPart.Position);
+    
+    
+}
+
+
+
+
+<div class="zone">
+    @foreach (var item in orderdContentItems) {
+        @Display(item)
+    }
+</div>
+  

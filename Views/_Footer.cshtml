@@ -1,0 +1,50 @@
+﻿@{
+    Func<dynamic, dynamic> Zone = x => Display(x); // Zone as an alias for Display to help make it obvious when we're displaying zones
+}
+
+<div class="container" id="footer">
+    <div class="inner">
+        <div class="columns">
+            <div class="column social">
+                @if (Model.FooterQuadFirst != null)
+                {
+                    @Zone(Model.FooterQuadFirst)
+                }
+            </div>
+            <div class="right">
+                <div class="column">
+                    @if (Model.FooterQuadSecond != null)
+                    {
+                        @Zone(Model.FooterQuadSecond)
+                    }
+                </div>
+                <div class="column">
+                    @if (Model.FooterQuadThird != null)
+                    {
+                        @Zone(Model.FooterQuadThird)
+                    }
+                </div>
+                <div class="column">
+                    @if (Model.FooterQuadFourth != null)
+                    {
+                        @Zone(Model.FooterQuadFourth)
+                    }
+                </div>
+                <div class="column">
+                    @if (Model.TripelThird != null) 
+                    {
+                        @Zone(Model.TripelThird)
+                    }
+                </div>
+            </div>   
+           
+            <div class="legals">
+                @if (Model.Footer != null)
+                {
+                    @Zone(Model.Footer)
+                }
+            </div>
+
+        </div>
+    </div>
+</div>

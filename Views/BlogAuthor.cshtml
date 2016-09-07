@@ -1,0 +1,23 @@
+﻿<div class="speech light bleft">
+	<ul class="blog-details">
+		@*<li>
+			<strong>Categories</strong>
+			<a href="#">Development news</a>, <a href="#">Health care</a>
+		</li>*@
+		<li>
+			<strong>Author</strong>
+		    <p>@Model.Name</p>
+            @if (Model.Photo != null && Model.Photo != null)                
+		    {
+                @Display(New.ImageField(ImageField:Model.Photo))
+            }
+            else
+            {
+                <img src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/temp/blog-author-riders.png")" alt="riders logo" />
+            }
+		</li>
+	</ul>
+	<span></span>
+</div>
+
+

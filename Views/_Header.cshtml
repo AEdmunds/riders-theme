@@ -1,0 +1,36 @@
+﻿@{
+    /* Global includes for the theme
+    ***************************************************************/
+    
+    SetMeta("X-UA-Compatible", "IE=edge,chrome=1");
+    
+//#if DEBUG
+
+    //Style.Include("http://fonts.googleapis.com/css?family=Lobster&subset=latin");
+    Style.Include("default.css");
+    Script.Require("jQuery8");
+    Script.Require("hover");
+    Script.Require("general");
+
+    if (Request.Browser.Browser == "IE" && Request.Browser.MajorVersion == 7)
+    {
+        Script.Require("ie");
+    }
+    
+//#else
+
+//    Script.Require("jQuery8").UseCdn();
+//    Style.Require("main");
+//    Script.Require("main");
+
+//#endif
+
+    //Script.Require("share-this").AtHead();
+    //Script.Require("sl-options").AtHead();
+    
+    WorkContext.Layout.Header.Add(New.Branding(), "5"); // Site name and link to the home page
+    WorkContext.Layout.Footer.Add(New.ChangeCulture(), "1");
+    WorkContext.Layout.Footer.Add(New._LeagalsMenu(), "5");
+    WorkContext.Layout.Footer.Add(New.BadgeOfHonor(), "5"); // Powered by Orchard
+    WorkContext.Layout.TripelThird.Add(New.NewsSignup(), "1");
+}

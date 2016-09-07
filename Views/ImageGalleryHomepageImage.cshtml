@@ -1,0 +1,67 @@
+﻿@using Orchard.MediaLibrary.Models
+@using Pnv.ImageUploadField.Fields
+@{
+    var mediaPart = (MediaPart)Model.MediaPart;
+
+
+    var cssClass = Model.MediaPart.ContentItem.ImagePart.CssClass.Value;
+    var link = Model.MediaPart.ContentItem.ImagePart.LinkText.Value;
+    var linkUrl = Model.MediaPart.ContentItem.ImagePart.LinkUrl.Value;
+    var linHref = linkUrl == null ? "#" : Url.Content(linkUrl.ToString());
+    var style = Model.MediaPart.ContentItem.ImagePart.ImageStyle.Value;
+    var quoteText = Model.MediaPart.ContentItem.ImagePart.QuoteText;
+    var quoteImage = (ImageUploadField)Model.MediaPart.ContentItem.ImagePart.QuoteImage;
+     
+}
+
+@if (cssClass == "info-graphic") 
+{
+    <div class="info-graphic">
+	    <img src="@mediaPart.MediaUrl" alt="@mediaPart.AlternateText" />
+        <div class="content">
+            @if (linkUrl != null) {
+                <a href="@linHref" class="ribbon"><span>@link</span></a>    
+            }
+        </div>
+    </div>
+}
+else 
+{
+    <div>
+        <img src="@mediaPart.MediaUrl" alt="@mediaPart.AlternateText" />
+        
+        @if (style == "Quote") 
+        {
+            <div class="content quote">
+		        <div class="copy">
+			        <div>
+				        <blockquote>@mediaPart.Caption</blockquote>
+			            <p class="credit">
+			               @if (quoteImage.ImageUrl != null) {
+			                    @Display(New.ImageField(ImageField:quoteImage)) 
+			                }
+                            @if (quoteText != null) {
+                                <span>@quoteText.Value</span>        
+                            }
+                         </p>
+			        </div>
+		        </div>
+		        <a href="@linHref" class="ribbon white"><span>@link</span></a>
+	        </div>
+        }
+        else 
+        {
+            <div class="content">
+                <div class="copy">
+                    <div>
+                        <p>@mediaPart.Caption</p>
+                    </div>
+                </div>
+                <a href="@linHref" class="ribbon white"><span>@link</span></a>
+            </div>    
+        }
+        
+    </div>
+}
+
+

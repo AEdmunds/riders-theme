@@ -1,0 +1,75 @@
+﻿@using Orchard.Utility.Extensions;
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+    
+    var contentTypeClassName = ((string)Model.ContentItem.ContentType).HtmlClassify();
+
+   
+    var contentItem = Model.ContentItem;
+    var name = Model.ContentItem.TitlePart.Title;
+    var jobTitle = Model.ContentItem.TeamMemberLarge.JobTitle.Value;
+    var shortBio = (string) Model.ContentItem.TeamMemberLarge.ShortBio.Value;
+    var body = (string) Model.ContentItem.BodyPart.Text;
+
+    //var body = new HtmlString(Html.Excerpt(bio, 200);
+    //var extra = new HtmlString(bio.Substring(200).Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+
+    var linkedin = Model.ContentItem.TeamMemberLarge.LinkedInProfile.Value;
+    var twitter = Model.ContentItem.TeamMemberLarge.TwitterHandel.Value;
+    var blog = Model.ContentItem.TeamMemberLarge.BlogLink.Value;
+
+    
+}
+<div class="right">
+    <div class="column span2">
+	    <h2 class="ribbon large"><span>@jobTitle</span></h2>
+        <p class="intro">@shortBio</p>
+        @Html.Raw(body)
+    </div>
+    <div class="column span2">
+        <div class="image-container">
+            
+            @Display(New.ImageField(ImageField:Model.ContentItem.TeamMemberLarge.Photo))
+            
+        </div>
+        <div class="social">
+@* ReSharper disable WrongExpressionStatement *@
+            @if (twitter != null)
+            {
+                <a href="https://twitter.com/ridersforhealth" class="twitter-follow-button" data-show-count="false" data-show-screen-name="false">Follow @@@twitter </a>
+                <script> 
+                    !function(d, s, id) {
+                        var js, fjs = d.getElementsByTagName(s)[0];
+                        if (!d.getElementById(id)) {
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//platform.twitter.com/widgets.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }
+                    } (document, "script", "twitter-wjs"); 
+                </script>
+            }
+@* ReSharper restore WrongExpressionStatement *@
+            @if (linkedin != null)
+            {
+                <a href="@linkedin" style="text-decoration:none;display:block;float:left;margin-top:0.2em;">
+                    <img src="http://www.linkedin.com/img/webpromo/btn_in_20x15.png" width="20" height="15" alt="View linked In profile" style="width:auto;float:left;" border="0">
+                          <span style="font: 70% Arial,sans-serif;float:left; color:#0783B6;">
+                              @name                                                                              
+                          </span>
+                </a>    
+            }
+            @if (blog != null)
+            {
+           		<a href="@blog" class="button">Read blog posts</a>
+            }    
+            
+				
+	     </div>
+    </div>  
+</div>

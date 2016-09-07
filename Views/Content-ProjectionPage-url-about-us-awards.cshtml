@@ -1,0 +1,42 @@
+﻿@using OrangeCheck.Utils
+@using Orchard.ContentManagement
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.Utility.Extensions;
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+
+    var contentItems = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Content.Items);
+    var projectionList = contentItems.First(x => x.Metadata.Type == "List");
+    var awards = (IList<dynamic>)projectionList.Items;
+
+    var years = awards.Select(x => x.ContentItem.Award.DateAwarded.DateTime.Year).Distinct().OrderByDescending(x => x).ToList();
+
+}
+
+<div class="column full">
+    
+    @Display(ShapeHelper.Find((Shape) Model, "Parts_Title")) 
+    @Display(ShapeHelper.Find((Shape) Model, "Parts_Introduction"))
+      
+    @foreach (var year in years)
+    {
+        <h2 class="ribbon large"><span>@year</span></h2>
+	    <ul class="list awards">
+            @foreach(var award in awards
+                .Where(x => x.ContentItem.Award.DateAwarded.DateTime.Year == year)
+                .OrderByDescending(x => x.ContentItem.Award.DateAwarded.DateTime))
+            {
+                @Display(award)
+            }
+        </ul>
+          
+    }
+     
+</div>
+
+

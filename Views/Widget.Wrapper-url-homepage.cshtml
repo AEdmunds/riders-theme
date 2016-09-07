@@ -1,0 +1,43 @@
+﻿
+@using Orchard.ContentManagement;
+@using Orchard.Widgets.Models;
+@{
+    var widgetPart = ((IContent)Model.ContentItem).As<WidgetPart>();
+    // dont think this is currently used 
+}
+
+@if ( (widgetPart.RenderTitle && HasText(widgetPart.Title)) || Model.Header != null) {
+    
+    if ((widgetPart.RenderTitle && HasText(widgetPart.Title))) 
+    {
+        
+        @widgetPart.TypeDefinition.Name
+        
+        if (widgetPart.TypeDefinition.Name == "ProjectionWidget")
+        {
+             <h2><a href="@Url.Content(@"~/news-blog")">@widgetPart.Title</a></h2>
+        }
+        else if (widgetPart.TypeDefinition.Name == "BlogArchives")
+        {
+            @widgetPart.Title
+        }
+        else
+        {
+             <h2>@widgetPart.Title</h2>
+        }
+    }
+    
+    @Display(Model.Header)
+    
+}
+
+@Display(Model.Child)
+
+@if (Model.Footer != null)
+{
+    @Display(Model.Footer)
+}
+
+
+
+			

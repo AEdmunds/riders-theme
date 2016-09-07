@@ -1,0 +1,38 @@
+﻿@using OrangeCheck.Utils
+@using Orchard.Core.Common.Fields
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.Fields.Fields
+@{
+    
+    Script.Require("jQueryValidation_Unobtrusive").AtHead();
+    Script.Require("bootstrap");
+    ViewBag.Form = "EnqForm";
+
+    dynamic content = Model.Content;
+    var items = (List<dynamic>)content.Items;
+    var enqForm = items.First().ContentItem.EnqForm;
+    
+}
+
+
+<fieldset>
+	<dl>
+	    <dt>&nbsp;</dt>
+        <dd>
+            Fields marked with a * are mandatory.   
+        </dd>    
+        @Html.Partial("_DropdownEditor", (EnumerationField)enqForm.Title)
+        @Html.Partial("_TextBoxEditor", (InputField)enqForm.Name, ViewData)
+        @Html.Partial("_TextBoxEditor", (InputField)enqForm.Organisation)
+        @Html.Partial("_TextAreaEditor", (TextField)enqForm.Address)
+        @Html.Partial("_TextBoxEditor", (InputField)enqForm.Mobile)
+        @Html.Partial("_TextBoxEditor", (InputField)enqForm.Email)
+        @Html.Partial("_DropdownEditor", (EnumerationField)enqForm.Nature)
+        @Html.Partial("_TextBoxEditor", (InputField)enqForm.OtherNature)
+        @Html.Partial("_CheckBoxEditor", (EnumerationField)enqForm.Countries)
+        @Html.Partial("_TextBoxEditor", (InputField)enqForm.OtherCountry)
+        @Html.Partial("_TextAreaEditor", (TextField)enqForm.Enquiry)
+            
+	</dl>
+</fieldset>
+	

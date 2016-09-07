@@ -1,0 +1,18 @@
+﻿
+@using Orchard.ContentManagement
+@using Orchard.DisplayManagement.Shapes;
+@{
+   
+    var contentItems =  (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Content.Items);
+    var menuWidget = contentItems.First(x => x.Metadata.Type == "Parts_MenuWidget");
+    var menuItems = menuWidget.Menu.Items;
+    
+    foreach (var item in menuItems)
+    {
+        ShapeMetadata shapeMetadata = item.Metadata;
+        shapeMetadata.Alternates.Add("MenuItem__Navigation");
+    }
+    
+}
+
+@Display(Model.Content)

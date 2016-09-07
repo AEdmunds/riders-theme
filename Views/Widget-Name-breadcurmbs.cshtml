@@ -1,0 +1,30 @@
+﻿@using OrangeCheck.Utils
+@using Orchard.UI.Navigation
+
+@{
+    
+    var contentItems = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Content.Items);
+    var menuWidget = contentItems.First(x => x.Metadata.Type == "Parts_MenuWidget");
+    var menuItems = menuWidget.Menu.Items;
+
+    string requestUrl = Request.Path.Replace(Request.ApplicationPath, string.Empty).TrimEnd('/').ToUpperInvariant();
+
+    var showCrumb = Html.ContentItemInMenu(requestUrl, (IEnumerable<dynamic>)menuItems);
+    
+    
+   // var items = (List<dynamic>)Enumerable.Cast<dynamic>(Model.Items);
+
+    //
+
+    
+     //   .Select(item => ((MenuItem)item).Href.ToString().Replace(Request.ApplicationPath, string.Empty).TrimEnd('/').ToUpperInvariant())
+     //   .Any(modelUrl => requestUrl == (string) modelUrl);
+
+
+    //var firsst = items.First();    
+}
+@if (showCrumb)
+{
+    @Display(Model.Content)
+}   
+

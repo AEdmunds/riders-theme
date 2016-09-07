@@ -1,0 +1,50 @@
+﻿@using Orchard.Utility.Extensions;
+@using Contrib.Taxonomies.Models;
+@using Contrib.Taxonomies.Helpers;
+
+@{
+    Style.Include("admin-taxonomy.css");
+
+    // get the currently checked categories form the query string
+    var qs = Request.QueryString;
+    var cats = qs.Get("category");
+
+}
+
+@foreach (TermPart term in Model.Terms)
+{
+     if (qs != null && cats != null)
+     {
+         
+         
+             var catArray = cats.Split(',');
+             if (catArray.Contains(term.Name))
+             {
+                 <span>
+                     <input type="checkbox" value="@term.Name" id="@term.Name" name="category" checked="checked" />
+                     <label for="@term.Name">@term.Name</label>
+                 </span>
+             }
+             else
+             {
+                 <span>
+                     <input type="checkbox" value="@term.Name" id="@term.Name" name="category" />
+                     <label for="@term.Name">@term.Name</label>
+                 </span>
+             }
+         
+     }
+     else
+     {
+            <span>
+                <input type="checkbox" value="@term.Name" id="@term.Name" name="category" checked="checked" />
+                <label for="@term.Name">@term.Name</label>
+            </span>
+     }
+
+        //Model.ContentPart.DisplayContentCount ? (string) term.Name + T(" ({0})", term.Count).Text : (string) term.Name;
+
+    }
+
+
+

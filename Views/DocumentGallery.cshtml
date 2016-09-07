@@ -1,0 +1,21 @@
+﻿
+
+<div class="read-more-container">
+	<div class="read-more">
+		<h2>Read more...</h2>
+	    <ul class="docs">
+	        @foreach (var content in Model.MediaParts)
+         {
+	            var cssClass = "pdf";
+                if (content.MediaUrl.EndsWith(".doc") || content.MediaUrl.EndsWith(".docx")) {
+                    cssClass = "word";
+                }
+	            <li class="@cssClass">
+	                <span></span>
+	                <h3><a href="@content.MediaUrl">@content.Title</a></h3>
+	                <p>@content.Caption</p>
+	            </li>
+	        }
+	    </ul>
+	</div>
+</div>

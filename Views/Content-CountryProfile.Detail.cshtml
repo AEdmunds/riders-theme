@@ -1,0 +1,102 @@
+﻿
+@using OrangeCheck.Utils
+@using Orchard.DisplayManagement.Shapes
+@using Riders.Promo.Models
+
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+
+    var promo = Model.ContentItem.PromoPart;
+    
+    //var tabs = Model.ContentItem.TabsPart;
+    var impactDataImageField = Model.ContentItem.CountryProfile.ImpactDataImage;
+    var mapImageField = Model.ContentItem.CountryProfile.MapImage;
+    var impactDataText = Model.ContentItem.CountryProfile.ImpactDataText.Value;
+    var impactDataHtml = "<p class='intro'>" + impactDataText.ToString()
+                                                   .Replace(Environment.NewLine, "</p><p>") + "<p>";
+    var directorName = Model.ContentItem.CountryProfile.ProgramDirectorName.Value;
+    var directorPhotoField = Model.ContentItem.CountryProfile.ProgramDirectorPhoto;
+    var quoteText = Model.ContentItem.CountryProfile.QuoteText.Value;
+    var quoteTitle = Model.ContentItem.CountryProfile.QuoteJobTitle.Value;
+    var quoteName = Model.ContentItem.CountryProfile.QuoteName.Value;
+    var directorBio = Model.ContentItem.CountryProfile.ProgramDirectorBio.Value;
+    
+    //stats 
+    var yearStarted = Model.ContentItem.CountryProfile.YearStarted.Value;
+    var tecnitions = Model.ContentItem.CountryProfile.Technicians.Value;
+    var workshops = Model.ContentItem.CountryProfile.Workshops.Value;
+    var kPerMonth = Model.ContentItem.CountryProfile.KmPerMonth.Value + "k";
+    var livesTouched = Model.ContentItem.CountryProfile.LivesTouched.Value + "m";
+
+    var docs = Model.ContentItem.DocumentGalleryPart.Documents;
+    var mediaParts = docs.MediaParts;
+    
+}
+
+<div class="column">
+
+
+    @if (promo.PromoType == PromoType.Image)
+    {
+        @Display(ShapeHelper.Find((Shape)Model, "Parts_Promo_Image"))
+    }
+    @if (promo.PromoType == PromoType.Video)
+    {
+        @Display(ShapeHelper.Find((Shape) Model, "Parts_Promo_Video"))
+    } 
+    
+    @Display(ShapeHelper.Find((Shape)Model, "Parts_Tabs")) 
+    
+    
+    <h2 class="ribbon small"><span>Impact data</span></h2>
+    <div class="image-container border">
+        @Display(New.ImageField(ImageField:impactDataImageField, CssClass:"info-graphic"))
+	</div>
+    @Html.Raw(impactDataHtml)
+    <a href="@Url.Content(@"~/what-we-do/our-impact")" class="highlight">Read more about our impact ></a>
+    
+    @Display(New.DocumentGallery(MediaParts:mediaParts))
+
+</div>
+<div class="column">
+    <div class="country-map">
+        @Display(New.ImageField(ImageField:mapImageField))
+        <h2>Started</h2>
+        <h3>@yearStarted</h3>
+        <h2>Technicians</h2>
+        <h3>@tecnitions</h3>
+        <h2>Workshops</h2>
+        <h3>@workshops</h3>
+        <h2>Kilometers <br />per month</h2>
+        <h3>@kPerMonth</h3>
+        @if (livesTouched != "0m")
+        {
+            <h2>Population covered</h2>
+            <h3>@livesTouched</h3>
+        }
+    </div>
+    <div class="block">
+        <h2 class="ribbon small"><span>@directorName</span></h2>
+        <div class="image-container small">
+            @Display(New.ImageField(ImageField:directorPhotoField))
+        </div>
+        <p>
+            @directorBio
+        </p>
+    </div>
+    <div class="block contact solid">
+        <h2 class="small">Contact us</h2>
+        <p>If you would like to discuss how Riders can support you, then please get in touch:</p>
+        <a href="@Url.Content(@"~/translatelink?url=enquiry-form")" class="ribbon"><span>Enquiry form</span></a>
+    </div>	
+    <blockquote>
+        <span class="quotes"></span>
+        <span>@quoteText</span>
+        <em>@quoteName, @quoteTitle</em>
+    </blockquote>
+</div>

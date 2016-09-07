@@ -1,0 +1,28 @@
+﻿@{
+
+    var name = Model.ContentItem.TitlePart.Title;
+    var jobTitle = Model.ContentItem.TeamMemberSmall.JobTitle.Value;
+    
+    var intro = (string)Model.ContentItem.TeamMemberSmall.BioIntroduction.Value;
+    var introHtml = intro != null ? intro.Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>") : null ;
+    
+    var bio = (string)Model.ContentItem.TeamMemberSmall.Bio.Value;
+    var bioHtml = bio != null ? bio.Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>") : null ;
+
+}
+
+<li>
+
+    <div class="image-container">
+	    
+        @Display(New.ImageField(ImageField:Model.ContentItem.TeamMemberSmall.Photo))
+        
+    </div>
+    <h3><a href="#">@name<span></span></a></h3>
+    <h4>@jobTitle</h4>
+    <p>@introHtml</p>
+    <div class="extra-info">
+        <p>@bioHtml</p>
+    </div>
+
+</li>

@@ -1,0 +1,31 @@
+﻿
+@using OrangeCheck.Utils
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.Utility.Extensions;
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+
+    var contentItems = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Content.Items);
+    var projectionList = contentItems.First(x => x.Metadata.Type == "List");
+    var items = (IList<dynamic>)projectionList.Items;
+    
+    
+}
+
+<div class="column span3">
+    
+    @Display(ShapeHelper.Find((Shape) Model, "Parts_Introduction"))
+    
+    <ul class="list">
+        @foreach (var item in items)
+        {
+            @Display(item)
+        }
+    </ul>
+</div>
+

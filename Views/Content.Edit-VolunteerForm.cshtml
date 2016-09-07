@@ -1,0 +1,50 @@
+﻿@using OrangeCheck.Utils
+@using Orchard.Core.Common.Fields
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.Fields.Fields
+@{
+    
+    Script.Require("jQueryValidation_Unobtrusive").AtHead();
+    Script.Require("bootstrap");
+    ViewBag.Form = "VolunteerForm";
+
+    dynamic content = Model.Content;
+    var items = (List<dynamic>)content.Items;
+    var volunteerForm = items.First().ContentItem.VolunteerForm;
+    
+     
+}
+
+<fieldset>
+        <dl>
+            <dt>&nbsp;</dt>
+            <dd>
+                Fields marked with a * are mandatory.   
+            </dd>
+            @Html.Partial("_DropdownEditor", (EnumerationField)volunteerForm.Title)
+            @Html.Partial("_TextBoxEditor", (InputField)volunteerForm.Name)
+            @Html.Partial("_TextBoxEditor", (InputField)volunteerForm.Orgnisation)
+            @Html.Partial("_TextAreaEditor", (TextField)volunteerForm.Address)
+            @Html.Partial("_TextBoxEditor", (InputField)volunteerForm.Phone)
+            @Html.Partial("_TextBoxEditor", (InputField)volunteerForm.Email)
+            @Html.Partial("_DropdownEditor", (EnumerationField)volunteerForm.AgeGroup)
+            
+        </dl>
+	</fieldset>
+	<fieldset>
+		<dl>
+			@Html.Partial("_TextAreaEditor", (TextField)volunteerForm.Why)
+		    @Html.Partial("_TextAreaEditor", (TextField)volunteerForm.Availability)
+            @Html.Partial("_TextAreaEditor", (TextField)volunteerForm.How)
+		    @Html.Partial("_TextAreaEditor", (TextField)volunteerForm.Skills)
+	    </dl>
+	</fieldset>
+	<fieldset>
+		<dl>
+	        @Html.Partial("_DropdownEditorBoolean", (BooleanField)volunteerForm.Experience)
+            @Html.Partial("_TextAreaEditor", (TextField)volunteerForm.ExperienceDetails)
+		    @Html.Partial("_DropdownEditorBoolean", (BooleanField)volunteerForm.Member)
+        	@Html.Partial("_TextAreaEditor", (TextField)volunteerForm.Exemption)
+		</dl>
+	</fieldset>
+	

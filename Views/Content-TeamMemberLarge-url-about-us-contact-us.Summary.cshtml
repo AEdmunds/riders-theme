@@ -1,0 +1,18 @@
+﻿@using Orchard.ContentManagement
+@{
+
+    
+    var name = Model.ContentItem.TitlePart.Title;
+    var jobTitle = Model.ContentItem.TeamMemberLarge.JobTitle.Value;
+    var contactName = "";
+    var contactEmail = "";
+  
+}
+
+<dt>@jobTitle</dt>
+<dd>
+	<strong>@name</strong><br />
+    Please contact Susie Akroyd<br />
+    sakroyd@riders.org
+</dd>
+	

@@ -1,0 +1,21 @@
+﻿
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+    var image = Model.ContentItem.Partner.Logo;
+    var link = Model.ContentItem.Partner.Link.Value;
+}
+
+
+<div class="image-container">
+    @if (image != null)
+    {
+        <a href="@link">
+            @Display(New.ImageField(ImageField:image))
+        </a>
+    }
+</div>
+<h3>
+    <a href="@link">
+        @title
+    </a>
+</h3>

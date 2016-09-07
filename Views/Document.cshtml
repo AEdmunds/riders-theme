@@ -1,0 +1,23 @@
+﻿@using Orchard.Mvc.Html;
+@using Orchard.UI.Resources;
+@{
+    // document added to remove extra class from html tag 
+
+    RegisterLink(new LinkEntry { Type = "image/x-icon", Rel = "shortcut icon", Href = Url.Content("~/Themes/OrangeCheck/Content/images/favicon.png") });
+}
+<!DOCTYPE html> 
+<html lang="@WorkContext.CurrentCulture"> 
+<head> 
+    <meta charset="utf-8" /> 
+    <title>@Html.Title("Riders for Health")</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+     
+    @Display(Model.Head)
+    <script>(function(d){d.className="dyn "+d.className.substring(7,d.length);})(document.documentElement);</script> 
+</head> 
+<body> 
+@Display(Model.Body)
+@Display(Model.Tail)
+</body>
+</html>

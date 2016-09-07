@@ -1,0 +1,18 @@
+﻿
+@using Orchard.Utility.Extensions;
+@using Orchard.ContentManagement;
+@using Contrib.Taxonomies.Models;
+
+@{
+    var terms = (IEnumerable<TermPart>)Model.Terms;
+	string name = Model.ContentField.Name;
+
+    var links = terms.Select(termPart => string.Format("<a href=\"{0}\">{1}</a>", Url.Content(@"~/news-blog/blog/archive?category=" + termPart.Name), termPart.Name)).ToArray();
+}
+
+@if (Model.Terms.Count > 0)
+{
+    <strong>@name.CamelFriendly()</strong>
+    @(new HtmlString(string.Join(", ", links)))
+    
+}

@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Orchard.Comments.Models.CommentPart>
+@using Orchard.Comments.Models;
+@using Orchard.ContentManagement
+@using Orchard.Core.Common.Models
+@using Orchard.Utility.Extensions;
+
+@foreach (var comment in Model) {
+
+    var date = string.Format("{0:dd MMMM, yyyy}", ((DateTime)comment.ContentItem.As<CommonPart>().CreatedUtc));
+    
+<h3>
+    @Display.CommentAuthor(ContentPart: comment)
+</h3>
+<p class="date">@date</p>
+<p>@(new MvcHtmlString(Html.Encode(comment.Record.CommentText).ReplaceNewLinesWith("<br />")))</p>
+        
+}
+
+

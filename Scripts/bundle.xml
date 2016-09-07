@@ -1,0 +1,27 @@
+﻿<root>
+  <output path="main.min.0.1.0.js">
+    <input path="jquery.hoverIntent.js"/>
+    <input path="jquery.cycle.all.js"/>
+    <input path="jquery.easing.1.3.js"/>
+    <input path="bootstrap.js"/>
+    <input path="general.js"/>
+    <input path="bootstrap-modal.js"/>
+    <input path="local.js"/>
+    <input path="jquery.cookie.js"/>
+    <input path="signup.js" />
+  </output>
+
+  <output path="home.min.0.1.0.js">
+    <input path="jquery.hoverIntent.js"/>
+    <input path="jquery.cycle.all.js"/>
+    <input path="jquery.easing.1.3.js"/>
+    <input path="royalslider/jquery.royalslider.min.js"/>
+    <input path="flipcounter.js"/>
+    <input path="general.js"/>
+    <input path="home-royal.js"/>
+    <input path="bootstrap-modal.js"/>
+    <input path="local.js"/>
+    <input path="jquery.cookie.js"/>
+    <input path="signup.js" />
+  </output>
+</root>

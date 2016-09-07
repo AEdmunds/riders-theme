@@ -1,0 +1,34 @@
+﻿@using OrangeCheck.Utils
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.Utility.Extensions;
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+    
+    if (title != null)
+    {
+        Html.TitleForPage((string) title);
+    }
+    
+    var vision = Model.ContentItem.AlternateIndexPage.Vision.Value;
+    var mission = Model.ContentItem.AlternateIndexPage.Mission.Value;
+
+}
+
+@Display(Model.Header)
+
+<div class="column span2">
+	@Display(New.Parts_Common_Body(Html:new HtmlString(Model.ContentItem.BodyPart.Text)))
+</div>
+
+<div class="column span2">
+    <div class="speech dark">
+		<p class="intro"><em>@T("Our vision")</em>@vision</p>
+		<span></span>
+	</div>
+    <div class="speech tleft">
+        <p class="intro"><em>@T("Our mission")</em>@mission</p>
+        <span></span>
+    </div>
+</div>
+
+

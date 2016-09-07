@@ -1,0 +1,21 @@
+﻿@using Orchard.ContentManagement
+@using Orchard.MediaLibrary.Fields
+@using Orchard.Utility.Extensions;
+
+@{
+    Style.Require("image-gallery");
+    Style.Require("royal");
+    Style.Require("royal-default");
+   
+    Script.Require("royal");
+    Script.Require("royal-init-home");
+    
+    var field = (MediaLibraryPickerField) Model.ContentField;
+    var mediaParts = field.MediaParts;
+
+    WorkContext.Layout.BeforeMain2.Add(New.ImageGalleryHomePage(MediaParts: mediaParts));
+    
+}
+
+
+

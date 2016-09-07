@@ -1,0 +1,9 @@
+Name: OrangeCheck
+Author: Pearl and Victory 
+Website: http://www.ridersforhealth
+Description: New look orange and black theme
+Version: 1.0
+BaseTheme: TheThemeMachine
+Zones: BeforeMain1, BeforeMain2, BeforeMain3, AssideSecondTop
+# todo: provide tags
+# Tags: Classic, Serif

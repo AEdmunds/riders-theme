@@ -1,0 +1,11 @@
+﻿@{
+    var image = Model.ContentItem.InfoGraphic.Image;
+    var text = Model.ContentItem.InfoGraphic.Text.Value;    
+}
+
+
+
+	<div class="image-container impact-stat">
+		@Display(New.ImageField(ImageField:image))
+	</div>
+	<p>@text</p>

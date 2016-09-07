@@ -1,0 +1,17 @@
+﻿@{
+    var feature3ImagePath = Model.ContentItem.ImageExternalLinkPart.Image.ImagePath;
+    var feature3LinkUrl = Model.ContentItem.ImageExternalLinkPart.Link.Value;
+    var feature3LinkText = Model.ContentItem.ImageExternalLinkPart.Link.Text;
+    var feature3Text = Model.ContentItem.ImageExternalLinkPart.Text.Value;
+
+}
+
+<div class="column">
+    <div class="image-container ad" id="alternateHtml">
+        <img src="@Url.Content(feature3ImagePath)" />
+        <div class="copy">
+            <h2 class="ribbon small black"><span><a href="@feature3LinkUrl" target="_blank">@feature3Text</a></span></h2>
+            <a href="@feature3LinkUrl" target="_blank" class="ribbon"><span>@feature3LinkText</span></a>
+        </div>
+    </div>
+</div>

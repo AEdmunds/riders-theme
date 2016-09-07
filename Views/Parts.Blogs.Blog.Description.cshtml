@@ -1,0 +1,11 @@
+﻿@if (HasText(Model.Description)) {
+<div class="content-description blog-description">
+    <p>
+        @if (Model.ContentItem.BlogPart.Name == "Blog")
+        {
+            <span>Our blog</span>
+        }
+        @Model.Description
+    </p>
+</div>
+}

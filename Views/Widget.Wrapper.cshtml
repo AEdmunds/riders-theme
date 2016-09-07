@@ -1,0 +1,55 @@
+﻿
+@using Orchard.ContentManagement;
+@using Orchard.Widgets.Models;
+@{
+    var widgetPart = ((IContent)Model.ContentItem).As<WidgetPart>();
+    //var requestUrl = Request.Path.Replace(Request.ApplicationPath, string.Empty).TrimEnd('/').ToUpperInvariant();
+}
+
+@if ( (widgetPart.RenderTitle && HasText(widgetPart.Title)) || Model.Header != null) {
+    
+    if ((widgetPart.RenderTitle && HasText(widgetPart.Title))) 
+    {
+        
+        if (widgetPart.TypeDefinition.Name == "ProjectionWidget")
+        {
+            if (widgetPart.Title == "Latest News")
+            {
+                <h2><a href="@Url.Content(@"~/news-blog")">@widgetPart.Title</a></h2>
+            }
+        }
+        else if (widgetPart.TypeDefinition.Name == "RecentBlogPosts")
+        {
+             if (Request.Url != null && Request.Url.AbsolutePath == Url.Content(@"~/news-blog"))
+             {
+                <h2 class="news" >@widgetPart.Title</h2>
+             }
+             else
+             {
+                <h2 class="ribbon small"><span><a href="@Url.Content(@"~/news-blog/news")">@widgetPart.Title</a></span></h2>
+             }
+         }
+         else if (widgetPart.TypeDefinition.Name == "BlogArchives")
+         {
+            @widgetPart.Title
+         }
+         else
+         {
+             <h2>@widgetPart.Title</h2>
+         }
+    }
+    
+    @Display(Model.Header)
+    
+}
+
+@Display(Model.Child)
+
+@if (Model.Footer != null)
+{
+    @Display(Model.Footer)
+}
+
+
+
+			

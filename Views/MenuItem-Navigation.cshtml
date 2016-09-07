@@ -1,0 +1,177 @@
+﻿
+@using Microsoft.CSharp.RuntimeBinder
+@using Orchard.ContentManagement
+@using Orchard.ContentPicker.Models
+@using Pnv.ImageUploadField.Fields
+@using Riders.MainMenu.Models
+
+@{
+    // odd formatting in this file is to cause more attractive results in the output.
+    var items = (IEnumerable<dynamic>)Enumerable.Cast<dynamic>(Model);
+
+    var contentItem = ((IContent)Model.Content).ContentItem;
+
+    string liClass = null;
+    if (contentItem != null)
+    {
+        var classNamePart = contentItem.Parts.SelectMany(p => p.Fields).ToList();
+
+        if (classNamePart.Any())
+        {
+            var classNameField = classNamePart.FirstOrDefault(f => f.Name == "ClassName");
+            if (classNameField != null)
+            {
+                liClass = classNameField.Storage.Get<string>(null);
+            }
+        }
+    }
+
+    var mainmenu = ((IContent)Model.Content.ContentItem).As<MainMenuPart>();
+
+    ImageUploadField menuImage = null;
+    var highlight = string.Empty;
+    HtmlString shortDescription = null;
+    HtmlString highlightText = null; 
+    if(mainmenu != null) {
+        
+        menuImage = Model.Content.ContentItem.MainMenuPart.MenuImage;
+        
+       
+        if (!string.IsNullOrEmpty(Model.Content.ContentItem.MainMenuPart.MenuText.Value))
+        {
+            var menuText = Model.Content.ContentItem.MainMenuPart.MenuText.Value;
+            shortDescription = new HtmlString(menuText.ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+        }
+
+
+    highlight = Model.Content.ContentItem.MainMenuPart.SubMenuHighlight.Value;
+
+    if (!string.IsNullOrEmpty(highlight))
+    {
+        var hgText = Model.Content.ContentItem.MainMenuPart.HighlightText.Value;
+        highlightText = new HtmlString(hgText.ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+    }
+        
+    }
+    
+    var contentMenuItem = ((IContent) Model.Content.ContentItem).As<ContentMenuItemPart>();
+    if (contentMenuItem != null) {
+        menuImage = Model.Content.ContentItem.ContentMenuItem.MenuImage;
+       
+        dynamic menuItem = Model.Content.ContentItem.ContentMenuItem;
+
+        try
+        {
+            if (menuItem.ItemDescription != null)
+            {
+                if (!string.IsNullOrEmpty(Model.Content.ContentItem.ContentMenuItem.ItemDescription.Value))
+                {
+                    var menuText = Model.Content.ContentItem.ContentMenuItem.ItemDescription.Value;
+                    shortDescription = new HtmlString(menuText.ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+                }
+            }
+        }
+        catch (RuntimeBinderException)
+        {
+            // swallow dynamic runtime binding exception
+        }
+
+        try
+        {
+            highlight = Model.Content.ContentItem.ContentMenuItem.SubMenuHighlight.Value;
+            if (!string.IsNullOrEmpty(highlight))
+            {
+                var hgText = Model.Content.ContentItem.ContentMenuItem.HighlightText.Value;
+                highlightText = new HtmlString(hgText.ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+            }
+        }
+        catch (RuntimeBinderException)
+        {
+            // swallow dynamic runtime binding exception
+        }
+
+    }
+    
+}
+@{
+if (!HasText(Model.Text)) {
+    @DisplayChildren(Model)
+} else {
+    string requestUrl = Request.Path.Replace(Request.ApplicationPath, string.Empty).TrimEnd('/').ToUpperInvariant();
+    string modelUrl = Model.Href.Replace(Request.ApplicationPath, string.Empty).TrimEnd('/').ToUpperInvariant();
+
+    if ((!string.IsNullOrEmpty(modelUrl) && requestUrl.StartsWith(modelUrl)) || requestUrl == modelUrl)
+    {
+        Model.Classes.Add("selected");
+    }
+
+    if (Model.Classes.Contains("last"))
+    {
+        Model.Classes.Add("donate");
+    }
+
+    if (!string.IsNullOrEmpty(liClass))
+    {
+        Model.Classes.Add(liClass);
+    }
+    
+    var tag = Tag(Model, "li");
+    @tag.StartElement
+            
+    @* morphing the shape to keep Model untouched*@
+    Model.Metadata.Alternates.Clear(); 
+    Model.Metadata.Type = "MenuItemLink";
+
+    @Display(Model)
+
+    if (items.Any() && !Model.Classes.Contains("last"))
+    {
+        //if (Model.Classes.Contains("dropdown"))
+        // {
+            <div class="dropdown">
+				<div class="inner">
+				    <span>
+				       
+				        @Display(New.ImageField(ImageField:menuImage))   
+				        
+				        @Display(Model)
+				        <p>@shortDescription</p>
+				    </span>
+                    <ul>
+                        @foreach (var item in items)
+                        {
+                            var h = item.Text.ToString() == highlight;
+                            
+                            if (h)
+                            {
+                                item.Classes.Add("highlight");
+                            }
+                            
+                            var subLiTag = Tag(item, "li");
+
+                            if (item.Item.Culture == null || item.Item.Culture == WorkContext.CurrentCulture) {
+                                @subLiTag.StartElement
+                                <a href="@item.Href">@item.Text</a>
+                                if (h) {
+                                    <p>@highlightText</p>
+                                }
+                                @subLiTag.EndElement
+                            }
+                            
+                        }
+                    </ul>
+				</div>
+			</div>
+      //  }
+      //  else
+      //  {
+      //      <ul>
+      //          @DisplayChildren(Model)
+      //      </ul>
+      //  }
+
+    }
+    @tag.EndElement
+    }
+}
+

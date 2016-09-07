@@ -1,0 +1,83 @@
+﻿@{
+    Func<dynamic, dynamic> Zone = x => Display(x);
+}
+
+@Html.Partial("_Header")
+@Html.Partial("Parts/Local")
+
+<div class="container" id="header">
+    <div class="inner">
+        @if (Model.Header != null)
+        {
+            @Zone(Model.Header)
+        }
+        @if (Model.Navigation != null) 
+        {
+            @Zone(Model.Navigation)
+        }
+    </div>
+</div>
+
+@if (Model.Featured != null)
+{
+    <div class="container" id="hero">
+        <div class="inner">
+            @Zone(Model.Featured)
+        </div>
+    </div>
+}
+
+
+<div class="container" id="content">
+    <div class="inner">
+        <div class="columns no-left-nav">
+          
+            @if (Model.Messages != null)
+            {
+                <div id="messages">
+                    @Zone(Model.Messages)
+                </div>
+            }
+            @if (Model.BeforeMain != null)
+            {
+                @Zone(Model.BeforeMain)
+                @Zone(Model.BeforeMain1)
+                @Zone(Model.BeforeMain2)
+                @Zone(Model.BeforeMain3)
+            }
+        </div>
+        
+        @if (Model.beforeContent != null)
+        {
+            @Model.beforeContent
+        }  
+
+        <div class="columns no-left-nav two uneven">
+           
+            @if (Model.Content != null)
+            {
+                @Zone(Model.Content)
+            }
+        
+           @if (Model.AfterContent != null)
+            {
+                <div id="after-content">
+                    @Zone(Model.AfterContent)
+                </div>
+            }
+    
+        </div>
+        
+        @if (Model.AfterMain != null)
+        {
+            <div class="right">
+                <div class="details">
+                    @Zone(Model.AfterMain)
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
+
+@Html.Partial("_Footer")

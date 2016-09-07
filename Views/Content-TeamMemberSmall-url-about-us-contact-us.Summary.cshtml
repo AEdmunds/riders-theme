@@ -1,0 +1,12 @@
+﻿@{
+
+    var name = Model.ContentItem.TitlePart.Title;
+    var jobTitle = Model.ContentItem.TeamMemberSmall.JobTitle.Value;
+    var email = "n.mashonga@riders.org";
+}
+
+<dt>@jobTitle</dt>
+<dd>
+	<strong>@name</strong><br />
+	@email
+</dd>

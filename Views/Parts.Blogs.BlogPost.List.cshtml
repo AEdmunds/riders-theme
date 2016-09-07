@@ -1,0 +1,22 @@
+﻿@{
+    IEnumerable<object> blogPosts = Model.ContentItems;
+    Model.ContentItems.Classes.Add("list");
+    
+}
+
+
+<div class="block news">
+    <h2 class="ribbon small"><span><a href="@Url.Content(@"~/news-blog/news")">Latest news</a></span></h2>
+    @if (blogPosts == null || blogPosts.Count() < 1)
+    {
+        <p>@T("There are no posts for this blog.")</p>
+    }
+    else
+    {
+        foreach (var blogPost in blogPosts)
+        {
+            @Display(blogPost)
+        }
+        
+    }
+</div>

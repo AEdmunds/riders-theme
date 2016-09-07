@@ -1,0 +1,15 @@
+﻿@using Orchard.ContentManagement
+@{
+
+    var contentItem = Model.ContentItem;
+    var name = Model.ContentItem.TitlePart.Title;
+    var jobTitle = Model.ContentItem.TeamMemberLarge.JobTitle.Value;
+  
+}
+
+<div class="column">
+	@Display(New.ImageField(ImageField:Model.ContentItem.TeamMemberLarge.Photo))
+    
+	<h2>@Html.ItemDisplayLink((string)name, (IContent)contentItem)</h2>
+	<h3>@jobTitle</h3>
+</div>

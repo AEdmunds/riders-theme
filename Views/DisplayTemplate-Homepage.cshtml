@@ -1,0 +1,95 @@
+﻿@using Mello.ImageGallery.Helpers
+@using System.Web.Mvc.Html
+@using Mello.ImageGallery.Models
+@{
+    
+    
+    Style.Require("royal");
+    Style.Require("royal-default");
+
+    Script.Require("royal");
+    Script.Require("home-royal");
+    
+}
+
+
+<div class="container" id="hero">
+    <div class="inner">
+		<div id="gallery-1" class="royalSlider rsDefault fwImage col span_4">
+		    @foreach (var image in Model.Model.Images)
+		    {
+		        <div class="@image.CssClass">
+		            <img src="@Url.Content(image.PublicUrl)" alt="@image.Title">
+                    
+                    @if (image.ImageStyle == ImageStyle.Normal)
+                    {
+                        <div class="content">
+                            @if (!string.IsNullOrEmpty(image.Caption))
+                            {
+                                <div class="copy">
+                                    <div>
+                                        <p>@image.Caption</p>
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(image.LinkText))
+                            {
+                                if (image.CssClass == "info-graphic")
+                                {
+                                    <a href="@image.LinkUrl" class="ribbon"><span>@image.LinkText</span></a>
+                                }
+                                else
+                                {
+                                    <a href="@image.LinkUrl" class="ribbon white"><span>@image.LinkText</span></a>
+                                }
+                            }
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="content quote">
+                            @if (!string.IsNullOrEmpty(image.Caption))
+                            {
+                                <div class="copy">
+                                    <div>
+                                        <blockquote>@image.Caption</blockquote>
+
+                                        <p class="credit">
+                                            @Display(New.ImageField(ImageField:image.QuoteImageVm))
+                                            @if (!string.IsNullOrEmpty(image.QuoteText))
+                                            {
+                                                <span>@image.QuoteText</span>
+                                            }
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                            @if (!string.IsNullOrEmpty(image.LinkText))
+                            {
+                                <a href="@image.LinkUrl" class="ribbon white"><span>@image.LinkText</span></a>
+                            }
+                        </div>
+                    }
+                    
+                    
+                    
+
+		        </div>
+
+		    }
+          
+       @*   <div class="info-graphic">
+				<img src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/hero/hero2.png")" />
+				<div class="content">
+					<a href="@Url.Content(@"~/what-we-do/our-impact")" class="ribbon"><span>Find out how</span></a>
+				</div>
+			</div>
+          
+          
+                *@
+          
+          
+        </div>
+    </div>
+</div>
+   

@@ -1,0 +1,12 @@
+﻿ @*
+    Model:
+      ContentPart
+*@
+
+@using Orchard.Comments.Models;
+@using Orchard.Utility.Extensions;
+@{
+    var comment = (Orchard.Comments.Models.CommentPart)Model.ContentPart;
+}
+
+@comment.Record.CommentDateUtc.GetValueOrDefault()

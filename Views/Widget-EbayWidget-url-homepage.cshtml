@@ -1,0 +1,45 @@
+﻿@{
+    Script.Require("ebay").AtFoot();
+
+    var keywords = (string)Model.ContentItem.EbayPart.Keywords;
+    var storeName = (string)Model.ContentItem.EbayPart.StoreName;
+    var noItemsText = (string) Model.ContentItem.EbayPart.NoItemsText; 
+}
+
+@Html.Hidden("StoreName", storeName)
+@Html.Hidden("Keywords", keywords)
+
+<div class="column">
+     <div id="ebayAlternatText" class="image-container ad auction" style="display:block">
+	    <img src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/auction-home-bg.jpg")" />
+	    <div class="copy">
+		    <p>
+		        @noItemsText  
+            </p>
+		    <img src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/ebay-logo.png")" class="ebay" />
+	    </div>
+    </div>
+    <div id="ebayAuctionItem" class="image-container ad auction" style="display:none">
+        <img src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/auction-home-bg.jpg")" />
+        <div class="copy">
+            <span id="ebayThumbnail"></span>
+            <h2 id="ebaytitle"></h2>
+            <dl>
+                <dt>Highest bid</dt>
+                <dd id="ebayHighestBid"></dd>
+                <dt id="ebayEndTimeTitle">Auction ends</dt>
+                <dd id="ebayEndTime"></dd>
+                <dt id="ebayTimeLeftTitle" style="display:none">Time left</dt>
+                <dd id="ebayTimeLeft"></dd>
+            </dl>
+            <span id="ebayBidNow"></span>
+            <img src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/ebay-logo.png")" class="ebay" />
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        submitEbayRequest();
+    });
+</script>

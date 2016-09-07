@@ -1,0 +1,55 @@
+﻿@using OrangeCheck.Utils
+@using Orchard.Comments.Models
+@using Orchard.DisplayManagement.Shapes
+@{
+    if (Model.Title != null)
+    {
+        Layout.Title = Model.Title;
+    }
+
+    var date = string.Format("{0:dd MMMM, yyyy}", ((DateTime) Model.ContentItem.CommonPart.CreatedUtc));
+
+    Orchard.ContentManagement.ContentItem contentItem = Model.ContentItem;
+    string title = Model.Title.ToString();
+    
+    string bodyHtml = Model.ContentItem.BodyPart.Text.ToString();
+    var body = new HtmlString(Html.Excerpt(bodyHtml, 500).ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>")); 
+}
+
+<h2>@Html.ItemDisplayLink(title, contentItem)</h2>
+<h3 class="date">@date</h3>
+<div class="speech light tright">
+	<ul class="blog-details">
+	    <li>
+	        @Display(ShapeHelper.Find((Shape)Model, "Fields_Contrib_TaxonomyField"))
+        </li>
+        
+		<li>
+			<strong>Author</strong>
+			<p>@Model.ContentItem.ContentAuthorPart.AuthorName</p>
+            @if (((CommentsPart)Model.ContentItem.CommentsPart).Comments.Any())
+            {
+                string commentCount = T.Plural("1 Comment", "{0} Comments", ((CommentsPart) Model.ContentItem.CommentsPart).Comments.Count()).ToString();
+                string url = string.Format("{0}#comments", @Url.ItemDisplayUrl(contentItem)); 
+                <a href="@url">@commentCount</a>
+            }
+            else
+            {
+                string leaveComment = T("Leave a comment").ToString();
+                string url = string.Format("{0}#comments", @Url.ItemDisplayUrl(contentItem)); 
+                <a href="@url">@leaveComment</a>
+            }
+               
+            @if (Model.ContentItem.ContentAuthorPart.Photo != null)                
+		    {
+                @Display(New.ImageField(ImageField:Model.ContentItem.ContentAuthorPart.Photo))
+            }
+            else
+            {
+                <img src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/temp/blog-author-riders.png")" alt="riders logo" />
+            }
+		</li>
+	</ul>
+	<p class="intro">@body @Html.ItemDisplayLink(T("read more").ToString(), contentItem)</p>
+	<span></span>
+</div>

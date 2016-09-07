@@ -1,0 +1,13 @@
+﻿@* keeps the rendering of content page simple  *@
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+    
+    if (title != null)
+    {
+        Html.TitleForPage((string) title);
+    }
+}
+
+@Display(Model.Header)
+
+@Display(Model.Content)

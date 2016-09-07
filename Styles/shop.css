@@ -1,0 +1,1732 @@
+/********************************************************/
+/* Stylesheet for Riders 								*/
+/* Default 												*/
+/* Created 11.08.12										*/
+/********************************************************/
+/* Reset ************************************************/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+/* remember to define focus styles! */
+:focus {
+	outline: 1px;
+	-moz-outline: 1px dotted #666 !important;
+	-moz-outline-offset: 1px !important;
+}
+body {
+	line-height: 1;
+	color: black;
+	background: white;
+}
+ol, ul {
+	list-style: none;
+}
+/* tables still need 'cellspacing="0"' in the markup */
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+
+/********************************************************/
+/* Fonts												*/
+/********************************************************/
+@font-face {
+    font-family: 'latoblack';
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-black-webfont.eot');
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-black-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-black-webfont.woff') format('woff'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-black-webfont.ttf') format('truetype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-black-webfont.svg#lato_blackregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latobold';
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bold-webfont.eot');
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bold-webfont.woff') format('woff'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bold-webfont.ttf') format('truetype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bold-webfont.svg#latobold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latobolditalic';
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bolditalic-webfont.eot');
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bolditalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bolditalic-webfont.woff') format('woff'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bolditalic-webfont.ttf') format('truetype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-bolditalic-webfont.svg#latobold_italic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latoregular';
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-regular-webfont.eot');
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-regular-webfont.woff') format('woff'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-regular-webfont.ttf') format('truetype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-regular-webfont.svg#latoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latoitalic';
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-italic-webfont.eot');
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-italic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-italic-webfont.woff') format('woff'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-italic-webfont.ttf') format('truetype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-italic-webfont.svg#latoitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latolight';
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-light-webfont.eot');
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-light-webfont.woff') format('woff'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-light-webfont.ttf') format('truetype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-light-webfont.svg#lato_lightregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latolightitalic';
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-lightitalic-webfont.eot');
+    src: url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-lightitalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-lightitalic-webfont.woff') format('woff'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-lightitalic-webfont.ttf') format('truetype'),
+         url('https://s3-eu-west-1.amazonaws.com/riders-live-cms/Styles/fonts/lato-lightitalic-webfont.svg#lato_lightitalic') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+/********************************************************/
+/* Elements												*/
+/********************************************************/
+body {
+	font-family:Arial, Helvetica, sans-serif;
+	color:#333;
+    padding:0 0 0 0;
+	background:#ECE9E2;
+}
+
+h1, h2, h3, h4 {
+	font-family:'latoregular', Arial, Helvetica, sans-serif;
+    font-weight:normal !important;
+}
+
+a {
+    color:#F60;
+    text-decoration:none;
+}
+a:hover {
+	color:#333;
+}
+
+strong {
+    font-weight:bold;
+}
+em {
+    font-style:italic;
+}
+
+hr {
+	border:0;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider-hori.png) repeat-x top left;
+	height:1px;
+	margin-bottom:1.5em;
+}
+
+input, select, textarea {
+	font-family:Arial, Helvetica, sans-serif;
+    border:1px solid #DAD7D1;
+    padding:0.3em 0.4em;
+    margin:0 0 0 0;
+	color:#333;
+	font-size:0.75em;
+}
+select {
+	padding:0.2em;
+}
+input[type=checkbox],
+input[type=radio] {
+    padding:0 0 0 0;
+    margin:0 0 0 0;
+    border:0;
+	width:auto !important;
+}
+input[type=submit] {
+    background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/form-button.png) no-repeat top right;
+    border:0;
+    color:#FFF !important;
+    padding:0 2em 0 1em;
+	height:25px;
+    width:auto !important;
+    cursor:pointer;
+	font-family:'latobold', Arial, Helvetica, sans-serif;
+	font-size:0.9em;
+}
+input[type=submit]:hover {
+    background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/form-button.png) no-repeat right -25px !important;
+}
+input[type=image] {
+	border:0;
+	padding:0;
+}
+
+iframe {
+	margin-bottom:2em;
+	width:100% !important;
+}
+
+/********************************************************/
+/* STRUCTURE											*/
+/********************************************************/
+.container {
+    width:100%;
+    float:left;
+}
+.inner {
+    width:100%;
+	max-width:63.125em;
+    margin:0 auto;
+}
+
+#header {
+	padding:0.625em 0 1.75em 0;
+	background:#FFF;
+}
+#hero {
+	border-bottom:1.5em solid #FFF;
+}
+#content {
+	background:#FFF url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/site-bg.png) repeat-x top left;
+	padding:0 0 3em 0;
+}
+#footer {
+	padding:1em 0;
+}
+
+
+/* COLUMNS */
+.columns {
+    width:98%;
+	padding:0 1% 1em 1%;
+	float:left;
+	background:#FFF;
+}
+.columns .right {
+	float:right;
+	width:76.5%;
+	margin-right:1%;
+}
+	.columns .right.border {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider-hori.png) repeat-x top left;
+		padding-top:2em;
+	}
+	
+.columns .column .image-container {
+	float:left;
+	width:100%;
+	position:relative;
+}		
+	.columns .column.span3 .image-container {
+		float:left;
+		margin:0.15em 0 1em 0;
+	}	
+	.columns.two .column .image-container {
+		margin:0 0 1em 0;
+	}	
+	.columns .column.span3 .image-container.small {
+		float:right;
+		margin:0.15em 0 1em 1em;
+		width:30%;
+		padding-left:3%;
+	}
+	.columns .column.span3 .image-container.medium {
+		float:right;
+		margin:0.15em 0 1em 1em;
+		width:66%;
+	}
+	.columns.two .column .image-container.medium,
+	.columns.two .column .image-container.small {
+		width:48%;
+		float:right;
+	}
+	.columns .column.span3 .image-container.hero {
+		margin-top:5px;
+	}
+	.columns .column .image-container.border {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider-hori.png) repeat-x top left;
+		padding-top:0.625em;
+		margin-top:1.5em;
+	}
+		.columns.two.uneven .column .image-container.border {
+			background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider.png) repeat-y top left;
+			padding-top:0.25em;
+			margin-top:0;
+			padding-left:1em;
+			margin-left:1.5em;
+			float:right;
+			width:33%;
+		}
+.columns .column .image-container img {
+	width:100%;
+	max-width:560px;
+	float:left;
+}
+	.columns.no-left-nav .column .image-container img {
+		max-width:460px;
+		height:auto !important;
+	}
+	.columns .column.span3 .image-container.small img {
+		max-width:170px;
+	}
+	.columns .column.span3 .image-container.medium img {
+		max-width:370px;
+	}
+.columns .column .image-container em {
+	display:block;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider.png) repeat-y top left;
+	padding:0 0 0.5em 0.75em;
+	font-size:0.7em;
+	color:#857966;
+	margin:0.5em 0 0.5em 0;
+	float:left;
+	font-style:normal;
+}
+.columns .column .image-container .copy {
+	position:absolute;
+	width:90%;
+	left:0;
+	bottom:5px;
+}
+.columns .column .image-container.auction .copy {
+	width:100%;
+	bottom:0;
+	padding-bottom:5px;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/auction-copy-bg.png);
+}
+.columns .column.full .image-container.auction .copy {
+	width:64%;
+	min-height:10em;
+	padding-bottom:0;
+}
+	.columns .column .image-container .copy h3.ribbon {
+		font-size:1em !important;
+	}
+		.columns .column .image-container .copy h3.ribbon span {
+			padding-bottom:0.3em !important;
+		}
+		.columns .column .image-container .copy h2.ribbon a {
+			color:#FFF !important;
+		}
+		.columns .column .image-container .copy h2.ribbon a:hover {
+			color:#333 !important;
+		}
+	.columns .column .image-container .copy a.ribbon {
+		margin-top:0 !important;
+	} 
+.columns .column .image-container.show-text {
+	padding-top:5px;
+}
+	.columns .column .image-container.show-text p {
+		position:absolute;
+		top:5px;
+		left:0;
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/pop-text-bg.png);
+		padding:0.75em 2% 1.25em 2% !important;
+		display:none;
+		width:96%;
+	}
+	.columns .column .image-container.show-text img {
+		position:relative;
+	}
+.columns .column .image-container.ad {
+	height:16.25em;
+}
+.columns .column.full .image-container.ad {
+	height:10em;
+	max-width:730px;
+}
+	.columns .column .image-container.ad img {
+		position:absolute;
+		top:0;
+		left:0;
+		z-index:0;
+	}
+	.columns .column.full .image-container.ad img {
+		max-width:730px;
+	}
+		.columns .column .image-container.ad.auction .copy img {
+			position:relative;
+			float:right;
+			width:60px;
+			margin:0.5em 0.5em 0 0.5em;
+		}
+	.columns .column .image-container.ad h2.ribbon {
+		position:relative;
+		width:70% !important;
+		margin-bottom:0 !important;
+		margin-right:20% !important;
+		font-size:1.2em !important;
+	}
+	.columns .column .image-container.ad .copy h2.ribbon a:hover {
+		color:#F60 !important;
+	}
+	.columns .column .image-container.ad a {
+		position:relative;
+		margin-top:0 !important;
+	}
+
+
+/********************************************************/
+/* CONTENT   											*/
+/********************************************************/
+/* HEADER */
+#header .logo {
+	width:10%;
+	float:left;
+}
+#header .logo img {
+	width:100%;
+	max-width:100px;
+}
+
+#header p {
+	font-family:'latolightitalic', Arial, Helvetica, sans-serif;
+	font-size:1.9em;
+	color:#9D9485;
+	float:right;
+	margin-top:1em;
+}
+
+/* Nav */
+#header ul {
+	width:100%;
+	float:left;
+	margin-top:1.5em;
+}
+#header ul li {
+	float:left;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/nav-divider.png) repeat-y top left;
+	margin:0.3em 0;
+	position:relative;
+}
+	#header ul li:first-child {
+		background:none;
+	}
+	#header ul li.donate {
+		background:none;
+		margin:0 0 0 1em;
+		float:right;
+	}
+#header ul li a {
+	font-family:'latobold', Arial, Helvetica, sans-serif;
+	text-transform:uppercase;
+	font-size:1em;
+	color:#333;
+	float:left;
+	display:block;
+	padding:0.6em 1.8em 0 1.8em;
+	height:1.5em;
+}
+	#header ul li:first-child a {
+		padding:0.6em 1.8em 0 0;
+	}
+	#header ul li a:hover,
+	#header ul li.selected a,
+	#header ul li.open a {
+		color:#F60;
+	}
+	#header ul li.donate a {
+		font-size:1.1em;
+		color:#FFF;
+		background:#F60 url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/donate-arrow.png) no-repeat right top;
+		float:left;
+		display:block;
+		padding:0.75em 2.8em 0 1.8em;
+		margin-right:-25px;
+		height:1.75em;
+		border-bottom-left-radius:25px;
+		-moz-border-radius-bottomleft:25px;
+		border-top-left-radius:25px;
+		-moz-border-radius-topleft:25px;
+	}
+		#header ul li.donate a:hover,
+		#header ul li.donate.selected a {
+			background:#333 url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/donate-arrow.png) no-repeat right -45px;
+		}
+
+/* Cart */
+#header #umbrella {
+	float:right;
+	background:#F5F4F0;
+	margin-top:-0.625em;
+	padding:0.625em;
+	border-bottom-left-radius:5px;
+	-moz-border-radius-bottomleft:5px;
+	border-bottom-right-radius:5px;
+	-moz-border-radius-bottomright:5px;
+}
+#header #umbrella ul {
+	width:auto;
+	margin-top:0;
+}
+#header #umbrella ul li {
+	float:left;
+	background:none;
+	margin:0 0;
+	position:relative;
+}
+	#header #umbrella ul li:first-child {
+		background:none;
+	}
+#header #umbrella ul li p,
+#header #umbrella ul li a {
+	font-family:Arial, Helvetica, sans-serif;
+	text-transform:none;
+	font-size:0.8em;
+	float:left;
+	display:block;
+	padding:5px 1em 5px 1em;
+	margin:0 0 0 0;
+	height:auto;
+}
+	#header #umbrella ul li:first-child a {
+		padding:5px 1em 5px 1em;
+	}
+	#header #umbrella ul li a.button {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/form-button.png) no-repeat right -25px;
+		padding:5px 2em 0 1em;
+		color:#FFF;
+		height:20px;
+		cursor:pointer;
+		font-family:'latobold', Arial, Helvetica, sans-serif;
+		font-size:0.9em;
+		display:block;
+		float:left;
+		margin:0 0;
+	}
+	#header #umbrella ul li a:hover.button {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/form-button.png) no-repeat top right !important;
+	}
+	#header #umbrella ul li.cart-link {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/shop/cart-icons.png) no-repeat 0.5em 4px;
+		padding-left:1.25em;
+		padding-right:1em;
+	}
+		#header #umbrella ul li:hover.cart-link {
+			background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/shop/cart-icons.png) no-repeat 0.5em -25px;
+		}
+	#header #umbrella ul li.cart-link a {
+		color:#F60;
+	}
+		#header #umbrella ul li.cart-link a:hover {
+			color:#333;
+		}
+
+
+/* CONTENT */
+/* Social and share links */
+#content .share {
+	width:300px;
+	float:right;
+	padding-top:0.75em;
+}
+#content .share li {
+	width:48%;
+	float:right;
+	text-align:right;
+}
+	#content .share li:first-child {
+		float:left;
+		text-align:left;
+	}
+#content .share iframe {
+	width:100% !important;
+	margin:0 !important;
+}
+
+/* General */
+a.ribbon {
+	font-family:'latobold', Arial, Helvetica, sans-serif;
+	font-size:0.75em;
+	text-transform:uppercase;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/heading-wrap.png) no-repeat bottom left;
+	padding-bottom:5px;
+	display:block;
+	margin:0.5em 0 0 -10px;
+	float:left;
+	color:#FFF;
+}
+a.ribbon.grey,
+a.ribbon.white,
+a.ribbon.selected {
+		color:#333;	
+}
+	a.ribbon span {
+		display:block;
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/donate-button.png) no-repeat top right;
+		height:23px;
+		padding:12px 2.5em 0 1.5em;
+	}
+	a.ribbon.grey span {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/donate-button.png) no-repeat right -70px;
+	}
+	a.ribbon.white span {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/donate-button.png) no-repeat right -105px;
+	}
+	a:hover.ribbon {
+		color:#333;
+	}
+	a:hover.section.ribbon {
+		color:#FFF;
+	}
+	a:hover.ribbon.grey,
+	a:hover.ribbon.white {
+		color:#F60;
+	}
+	
+#content h1 {
+	font-family:'latobold', Arial, Helvetica, sans-serif;
+	font-size:2.1em;
+	margin:0 0 0.5em 0;
+}
+#content h2 {
+	font-size:1.45em;
+	line-height:1.1em;
+	margin:0.25em 0 0.75em 0;
+	font-family:'latobold', Arial, Helvetica, sans-serif;
+	color:#F60;
+}
+	#content h2:first-child {
+		margin:0 0 0.75em 0;
+		padding:0 0 0 0;
+	}
+	#content.home h2 {
+		font-family:'latoregular', Arial, Helvetica, sans-serif;
+	}
+	#content .contact h2 {
+		font-family:'latoregular', Arial, Helvetica, sans-serif;
+		color:#333;
+		font-size:1.1em;
+		background: url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider-hori.png) repeat-x top left;
+		padding-top:0.5em;
+	}
+		#content .contact h2:first-child {
+			margin-top:5px;
+		}
+	#content .alert h2 {
+		font-family:'latoregular', Arial, Helvetica, sans-serif;
+		color:#FFF;
+		padding:0 0 0 0;
+		margin:0 0 0.25em 0;
+		font-size:1.25em;
+	}
+#content h3 {
+	font-family:'latobold', Arial, Helvetica, sans-serif;
+	font-size:1.2em;
+	margin:0 0 0.75em 0;
+	line-height:1.2em;
+}
+#content h4 {
+	font-family:'latoregular', Arial, Helvetica, sans-serif;
+	font-size:1.1em;
+	margin:0 0 0.75em 0;
+}
+
+#content h1.news {
+	font-family:'latoblack', Arial, Helvetica, sans-serif;
+	font-size:3.3em;
+	text-align:center;
+}
+#content h1.news span {
+	display:block;
+	width:40%;
+	margin:0.25em 0 0 30%;
+	height:1px;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/nav-divider-hori.png) repeat-x top left;
+}
+#content .news h2 {
+	font-size:1.7em;
+	margin-bottom:0.25em;
+	float:left;
+	width:100%;
+}
+	#content .news h2:first-child {
+		margin-top:0.25em;
+	}
+#content h2.news {
+	font-family:'latoitalic', Arial, Helvetica, sans-serif;
+	text-align:center;
+	font-size:2.1em;
+	color:#333;
+	margin-bottom:0.5em;
+}
+
+#content h3.date {
+	font-family:'latoitalic', Arial, Helvetica, sans-serif;
+	color:#857966;
+	margin:0.5em 0 0.75em 0;
+}
+#content .news h3.date {
+	margin:0 0 0 0;
+}
+
+#content h1.ribbon,
+#content h2.ribbon,
+#content h3.ribbon {
+	margin:0 0 0 -10px;
+	padding-bottom:5px;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/heading-wrap.png) no-repeat bottom left;
+}
+#content h1.ribbon {
+	max-width:50%;
+}
+#content h2.ribbon,
+#content h3.ribbon {
+	margin:0 0 0 -10px;
+	font-size:1.55em;
+	font-family:'latoregular', Arial, Helvetica, sans-serif;
+	color:#333;
+}
+	#content.home h2.ribbon {
+		padding-bottom:5px;
+	}
+	#content h2.ribbon.large {
+		font-size:2em;
+	}
+	#content h2.ribbon.small {
+		margin:0 0 0.25em -10px;
+		font-size:1.1em;
+		width:100%;
+		float:left;
+	}
+	#content h3.ribbon {
+		margin:0 0 0.25em -10px !important;
+		font-size:1.1em;
+	}
+	#content h3.ribbon {
+		font-family:'latoitalic', Arial, Helvetica, sans-serif;
+		margin:0 0 0 -10px;
+	}
+#content h1.ribbon span,
+#content h2.ribbon span,
+#content h3.ribbon span {
+	display:inline-block;
+	padding:0.1em 0.5em 0.15em 10px;
+	min-height:1em;
+	background:#333;
+	color:#FFF;
+}
+#content h2.ribbon span,
+#content h3.ribbon span {
+	background:#F60;
+}
+#content.home h2.ribbon span {
+	background:#F5F4F0;
+	color:#333;
+	display:block;
+	padding:0.35em 0.5em 0.35em 10px;
+}
+#content h2.ribbon.small span {
+	display:block;
+	padding:0.4em 0 0.4em 10px;
+	min-height:1.1em;
+	background:#F5F4F0;
+	color:#333;
+	width:100%;
+}
+#content h2.ribbon.black span {
+	background:#333;
+	color:#FFF;		
+}
+#content h3.ribbon.date span {
+	background:#333;
+	color:#FFF;
+}
+
+#content h2 a {
+	color:#F60;
+	display:block;
+}
+#content.home h2 a {
+	color:#333;
+}
+	#content h2 a:hover {
+		color:#333;
+	}
+	#content.home h2 a:hover {
+		color:#F60;
+	}
+#content h2.ribbon a,
+#content h3 a,
+#content h4 a {
+	color:#333;
+	display:block;
+}
+#content h2.ribbon.black a {
+	color:#FFF;
+}
+	#content h2.ribbon a:hover,
+	#content h3 a:hover,
+	#content h4 a:hover {
+		color:#F60;
+	}
+	
+#content p, #content li, #content td, #content dt, #content dd {
+	font-size:0.75em;
+	line-height:1.4em;
+}	
+	#content li h3 {
+		font-size:1.4em;
+	}
+	#content li p, #content li li {
+		font-size:1em;
+	}
+#content p, #content ul, #content ol {
+	padding:0 0 1.5em 0;
+}
+#content li, #content dt, #content dd {
+	padding:0 0 1em 0;
+}
+#content p.intro {
+	font-family:'latoitalic', Arial, Helvetica, sans-serif;
+	font-size:1.1em;
+	padding:0.25em 0 1em 0;
+}
+
+
+/* Left nav */
+#content .left-nav {
+	min-height:21em;
+	background:#FFF;
+	padding-left:10px !important;
+	margin-left:-20px;
+	width:20%;
+	float:left;
+}
+	#content .no-left-nav .left-nav {
+		display:none;
+	}
+#content .left-nav ul {
+	float:left;
+	width:100%;
+	list-style:none;
+	padding:0 0 0.15em 0;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/nav-divider-hori.png) repeat-x bottom left;
+}
+#content .left-nav ul li {
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/nav-divider-hori.png) repeat-x top left;	
+	padding:0.9em 0;
+	font-family:'latoregular', Arial, Helvetica, sans-serif;
+	font-size:1em;
+	float:left;
+	width:100%;
+}
+#content .left-nav ul li a {
+	color:#333;
+}
+	#content .left-nav ul li a:hover,
+	#content .left-nav ul li.selected a {
+		color:#F60;
+	}
+#content .left-nav ul li ul {
+	padding:0.5em 0;
+	background:none;
+}
+#content .left-nav ul li ul li {
+	background:none;	
+	padding:0.25em 0 0.25em 0.75em;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:0.75em;
+}
+#content .left-nav ul li.selected ul li a {
+	color:#333;
+}
+	#content .left-nav ul li ul li a:hover,
+	#content .left-nav ul li ul li.selected a {
+		color:#F60;
+	}
+
+#content .left-nav form {
+	width:100%;
+}
+#content .left-nav form fieldset {
+	background:none;
+}
+#content .left-nav fieldset ul li {	
+	padding:0.9em 0 1.2em 0;
+}	
+#content .left-nav fieldset select {
+	width:100%;
+	margin-top:0.5em;
+}	
+#content .left-nav fieldset span {
+	width:100%;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:0.75em;
+	display:block;
+	padding:0.75em 0 0 0;
+}
+#content .left-nav fieldset span input {
+	float:left;
+}
+#content .left-nav fieldset span label {
+	float:left;
+	padding:0 0 0 1em;
+	line-height:1.1em;
+}
+#content .left-nav fieldset a.rss {
+	display:block;
+	width:80%;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:0.75em;
+	color:#F60;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/rss-icon.png) no-repeat top left;
+	height:27px;
+	margin-top:0.5em;
+	padding:5px 0 0 20%;
+}
+#content .left-nav fieldset a:hover.rss {
+	color:#333;
+}
+
+#content .left-nav .section {
+	display:none;
+}
+
+/* Forms */
+#content form {
+	width:74%;
+	float:left;
+	margin-top:10px;
+}
+	#content form#cartform {
+		width:100%;
+	}
+#content form fieldset {
+	width:100%;
+	float:left;
+}
+#content form fieldset dl {
+	width:100%;
+	float:left;
+}
+#content form fieldset dl dt {
+	width:30%;
+	padding-left:0;
+	float:left;
+	clear:left;
+	padding-bottom:1.5em;
+}
+#content form fieldset dl dd {
+	width:66%;
+	padding-left:4%;
+	float:left;
+}
+#content form fieldset dl dd input,
+#content form fieldset dl dd select,
+#content form fieldset dl dd textarea {
+	font-size:1em;
+}
+#content form fieldset dl dd input,
+#content form fieldset dl dd select,
+#content form fieldset dl dd textarea {
+	width:97%;
+}
+#content form fieldset dl dd select {
+	width:100%;
+}
+	#content form fieldset dl dd.small select {
+		width:50%;
+	}
+#content form fieldset dl dd textarea {
+	height:10em;
+}
+#content form p {
+	float:left;
+	padding-top:0.75em;
+}
+#content form input[type=submit] {
+    background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/form-button.png) no-repeat right -60px;
+	height:35px;
+	font-size:1.1em;
+	float:right;
+}
+#content form input[type=submit]:hover {
+    background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/form-button.png) no-repeat right bottom !important;
+}
+#content form input[type=submit].plain {
+    background:#333;
+	height:auto;
+	font-size:1em;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif;
+	padding:0.5em;
+}
+#content form input[type=submit]:hover.plain {
+    background:#F60 !important;
+}
+
+/* RESULTS */
+.results {
+	width:74%;
+	float:left;
+}
+.results .item {
+	width:100%;
+	float:left;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider-hori.png) repeat-x top left;
+	margin-top:1em;
+	padding-top:1em;
+}
+.results .thumbnail {
+	width:10%;
+	float:left;
+}
+.results .search-excerpt {
+	width:85%;
+	float:right;
+	font-size:0.8em;
+	line-height:1.4em;
+}
+.results .search-excerpt h3 {
+	font-size:1.4em !important;
+}
+
+/* Table */
+#content table {
+	width:100%;
+	float:left;
+	margin-bottom:1.5em;
+}
+#content table th {
+	text-align:left !important;
+	font-size:0.7em;
+	font-weight:bold;
+	background:#F5F4F0;
+	padding:1em 0.5em;
+}
+#content table td {
+	text-align:left !important;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider-hori.png) repeat-x bottom left;
+	padding:0.5em;
+}
+
+#content .block.shop {
+	background:#F5F4F0;
+}
+#content .block.auction {
+	background:#333;
+	position:relative;
+	margin-top:31px;
+}
+#content .block.auction h2,
+#content .block.shop h2,
+.columns .column .image-container.auction .copy h2 {
+	background:#333;
+	margin:0 0 0 0;
+	padding:0.5em;
+	color:#FFF;
+	font-size:1.2em;
+}
+#content .block.shop h2 {
+	background:#F60;
+	color:#FFF;
+}
+.columns .column .image-container.auction .copy h2 {
+	background:transparent;
+	padding:0.25em 0.5em 0 0.5em !important;
+	font-size:1.1em !important;
+}
+	#content .block.auction h2 a,
+	#content .block.shop h2 a,
+	.columns .column .image-container.auction .copy h2 a {
+		color:#FFF !important;
+	}
+		#content .block.auction h2 a:hover,
+		.columns .column .image-container.auction .copy h2 a:hover {
+			color:#F60 !important;
+		}
+		#content .block.shop h2 a:hover {
+			color:#333;
+		}
+	#content .block.auction h2 em {
+		font-family:'latoitalic', Arial, Helvetica, sans-serif;
+		display:block;
+		font-style:normal;
+	}
+#content .block.auction img.ebay {
+	width:auto;
+	position:absolute;
+	left:0.5em;
+	top:-31px;
+	width:100px;
+	height:38px;
+}
+#content .block.shop p {
+	padding:0.5em 5%;
+	width:90%;
+	color:#333;
+}
+#content .auction dl {
+	padding:0 0.5em 0.5em 0.5em;
+	font-family:'latoregular', Arial, Helvetica, sans-serif;
+	float:left;
+	width:100%;
+}
+#content .full .auction dl {
+	width:70%;
+}
+	#content .auction dl dt,
+	#content .auction dl dd {
+		font-size:1em;
+		float:left;
+		padding:0 0 0.25em 0;
+		color:#F60;
+	}
+	#content .auction dl dt {
+		width:35%;
+	}
+	#content .auction dl dd {
+		width:65%;
+		color:#FFF;
+	}
+	#content .block.auction dl dt {
+		padding:0 0 0 0;		
+	}
+	#content .block.auction dl dt,
+	#content .block.auction dl dd {
+		width:100%;
+	}
+	#content .full .auction dl dt,
+	#content .full .auction dl dd {
+		padding:0 0 0 0;	
+	}
+#content .full .auction a.ribbon {
+	clear:left;
+}
+#content .block.auction a.ribbon span,
+#content .block.shop a.ribbon span,
+.columns .column .image-container.auction .copy a.ribbon span {
+	font-size:1.25em;	
+	padding:10px 2.5em 0 1.5em;
+	height:25px;
+}
+.columns .column .image-container.auction .copy a.ribbon span {
+	padding-left: 1.25em;
+}
+#content .auction img.ebay {
+	margin:0 0.25em 0 0;
+	width:86px;
+	height:33px;
+}
+
+
+/**
+ * The following is from:
+ * 
+ * Radiance
+ * A Shopify theme.
+ *
+ * Last update: June 19, 2012
+ *
+ * @version     2.2
+ * @author      Ben Watts @ Shopify
+ * @theme_url   http://radiance-theme.myshopify.com/
+ */
+
+/**
+ * Homepage Carousel
+ */
+
+/* Adjust this to alter the width and height of the carousel. */
+#carousel,
+#carousel .items > li{
+  width: 740px;
+  height: 300px;
+  }
+
+#carousel-wrapper{ margin: 5px 0 1.5em -10px; }
+
+#carousel{
+  position: relative;
+  z-index: 50;
+  overflow: hidden;
+  background: #F4F4F4;
+  }
+#carousel p,
+#carousel li{
+  margin: 0;
+  }
+
+#carousel .items{
+  margin: 0;
+  padding: 0;
+  width: 20000em;
+  position: absolute;
+  z-index: 1;
+  }
+#carousel .items > li{
+  float: left;
+  list-style: none;
+  }
+
+#carousel .items img{ max-width: 100%; } /* I was on the fence about adding this line in, but hope it will do some good */
+
+#carousel-controls{ margin-top: 10px; }
+
+
+#carousel .browse{
+  width: 20px;
+  height: 100%;
+  background: none !important;
+  position: absolute;
+  z-index: 100;
+  cursor: pointer;
+  opacity: .9;
+  display: none;
+  text-indent:-2000em;
+  }
+#carousel-next{
+  top: 0;
+  right: 0;
+  }
+#carousel-prev{
+  top: 0;
+  left: 15px;
+  }
+
+#carousel .arrow{
+  display: block;
+  position: absolute;
+  top: 20px;
+  }
+#carousel-next .arrow{
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid #FFF;
+  left: 5px;
+  }
+#carousel-prev .arrow{
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right:10px solid #FFF;
+  right: 5px;
+  }
+
+#carousel .browse:hover{ background: #dddddd; }
+#carousel-next:hover .arrow{ border-left-color: #333; }
+#carousel-prev:hover .arrow{ border-right-color: #333; }
+#carousel-slide-menu{list-style-type:none; text-align: center;}
+#carousel-slide-menu li{width:14px; height:14px; border-radius:7px; background: #000000; display:inline-block; margin:10px 3px 0; cursor: pointer;}
+#carousel-slide-menu .active{background:#bbbbbb;}
+
+/**
+ * Product and Collection Grid
+ */
+
+.product-grid{
+  list-style: none;
+  margin: 5px 0 0 0;
+  color: #333333;
+  }
+.product-grid li{
+  width: 177px;
+  float: left;
+  margin: 0 10px 2.5em 0;
+  position: relative;
+  }
+.product-grid .last-in-row{ margin-right: 0; }
+
+.generated-height .product-grid-item{
+  width: 177px;
+  position: absolute;
+  bottom: 0;
+  }
+
+.product-grid img{
+  display: block;
+  margin: 0 auto;
+  }
+
+.product-grid a{
+  text-decoration: none;
+  display: block;
+  color: #333333;
+  }
+.product-grid a:hover{
+  color: #ff6600;
+  }
+
+.product-grid .product-link{
+  display: block;
+  position: relative;
+  z-index: 1;
+  text-decoration: none;
+  margin: 0;
+  min-height: 50px;
+  /* for ie6: */
+  width: 100%;
+  }
+
+.product-photo{
+  max-width: 177px;
+  }
+.ie6 .product-grid{ overflow: hidden; }
+
+.product-information{
+  padding: 10px;
+  position: relative;
+  background: #f5f4f0;
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  }
+.product-information h3{
+  font: normal 24px/1 BebasNeueRegular, arial, sans-serif;
+  margin: 5px 0 10px 0;
+  }
+.product-information p{
+  line-height: 1.4em;
+  margin: 0 0 0 0;
+  }
+  
+.product-price{
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: auto;
+  padding: 4px 8px;
+  text-align: right;
+  font-weight: bold;
+  color: #333333;
+  filter: alpha(opacity=85); /* internet explorer */
+  -moz-opacity: 0.85;       /* mozilla, netscape */
+  opacity: 0.85;           /* fx, safari, opera */
+  background: #f5f4f0;
+  -webkit-border-radius: 4px 0 0 0;
+  -moz-border-radius: 4px 0 0 0;
+  border-radius: 4px 0 0 0;
+  }
+#featured-grid .product-price.sale, .sale {
+  background-color: #333333;
+  color: #ffffff;
+  }
+
+#featured-grid li{
+  width: 240px;
+  background: #f5f4f0;
+  -webkit-border-radius: 0 0 4px 4px;
+  -moz-border-radius: 0 0 4px 4px;
+  border-radius: 0 0 4px 4px;
+  }
+#featured-grid .product-photo{
+  max-width: 240px;
+  }
+#featured-grid .product-price{
+  top: -30px;
+  right: 0;
+  bottom: auto;
+  padding: 3px 8px;
+  font-size: 14px;
+  line-height: 24px;
+  color: #333333;
+  }
+  
+/**
+ * Single Product
+ */
+
+#product-information{
+  float: left;
+  width: 375px;
+  padding-top:5px;
+  }
+
+#product-actions{
+  padding: 4px 0 12px 0;
+  overflow: hidden; height: 1%;
+  }
+
+#purchase{
+  float: left;
+  text-align: left;
+  }
+#purchase input[type=submit] {
+  float: left !important;
+  }
+.sold-out #purchase{
+  float: none;
+  text-align: left;
+  }
+#add-to-cart{
+  margin: 8px 0 0 0;
+  }
+
+#product-header{
+  margin: 0 0 20px 0;
+  }
+#product-header #product-header-title{
+  float: left;
+  width: 60%;
+  margin: 5px 0 16px 0;
+  }
+#product-title{
+  margin: 0 0 5px 0;
+  font-size: 24px;
+  font-style: bold;
+  }
+#product-vendor{
+  font-size: 12px;
+  font-weight: normal;
+  margin: 0;
+  }
+#product-vendor a{
+  text-decoration: none;
+  }
+
+#product-actions select{
+  padding: 3px;
+  }
+#product-actions .price{
+  font-size: 18px;
+  margin: 0;
+  font-weight: bold;
+  text-align: left;
+  width:100%;
+  float:left;
+  }
+#product-actions .price strong{
+  color: #ff6600;
+  display: block;
+  }
+#product-actions .compare_at_price{
+  font-size: 12px;
+  display: block;
+  }
+
+.variants-wrapper{
+  text-align: left;
+  margin: 0 0 0 0;
+  }
+.selector-wrapper{
+  margin: 0 0 0 0 ;
+  }
+.selector-wrapper label{
+  margin: 0 5px 0 0;
+  text-align: right;
+  }
+
+#add-to-cart-msg{
+  background: #f5f4f0;
+  padding: 10px;
+  display: none;
+  margin: 0;
+  }
+
+#product-information .description {
+	font-size:0.8em;
+	line-height:1.4em;
+}
+#product-information .description p {
+	font-size:1em;
+}
+#product-information #sharing{
+  margin: 16px 0 0 0;
+  padding: 16px 0 0 0;
+  list-style: none;
+  border-top: 1px solid #dad7d1;
+  }
+#product-information #sharing li{
+  margin: 0;
+  float: left;
+  }
+  
+  
+/**
+ * Zoomy product gallery, with thumbs
+ * @see https://github.com/benwatts/enhance-gallery
+ */
+
+#product-gallery,
+#active-wrapper{
+  width: 303px;
+  float:right;
+  }
+
+#active-wrapper{
+  position: relative;
+  min-height: 50px;
+  overflow: hidden;
+  margin: 0 0 10px 0;
+  }
+#active-wrapper img{
+  display: block;
+  width: auto;
+  }
+#active-wrapper .zoomed{
+  position: absolute;
+  top: 0;
+  left: 0;
+  }
+
+#active-image-loading{
+  background: #fff url(http://cdn.shopify.com/s/files/1/0183/5385/t/3/assets/icon-loading.gif?566) 50% 50% no-repeat;
+  width: 40px;
+  height: 40px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  position: absolute;
+  top: 42%;
+  left: 42%;
+  z-index: 2;
+  text-indent: -900em; overflow: hidden;
+  }
+
+#thumbs{
+  margin: 0;
+  list-style: none;
+  }
+#thumbs li{
+  float: left;
+  margin: 0 8px 8px 0;
+  width: 54px;
+  height: 54px;
+  text-align: center;
+  }
+.no-js #thumbs li{ margin-right: 6px; }
+#thumbs li.last-in-row{
+  margin-right: 0;
+  }
+#thumbs a{
+  display: block;
+  border: solid 1px #dad7d1;
+  padding: 1px;
+  }
+#thumbs a:hover{
+  border: solid 1px #333333;
+  }
+#thumbs img{
+  margin: 0 auto;
+  display: block;
+  }
+  
+  
+/**
+ * Cart
+ */
+
+#cartform table{
+  width: 100%;
+  margin: 0 0 20px 0;
+  }
+#cartform table td{
+  text-align: center;
+  vertical-align: middle;
+  padding: 5px;
+  }
+#cartform table th{
+  text-align: center;
+  }
+col.checkout-image{ width: 50px; }
+col.checkout-delete{ width: 80px; }
+
+
+#cartform td img{ display: block; }
+#cartform input.text { border: solid 1px ; padding: 4px;  text-align: center; }
+
+#cartform .subtotal{
+  text-align: center;
+  }
+#cartform .update-quantities{
+  text-align: center;
+  padding: 5px;
+  width: 170px;
+  }
+
+#checkout-proceed{
+  float: right;
+  width: 38%;
+  text-align: right;
+  }
+
+#checkout-addnote{
+  float: left;
+  width: 100%;
+background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/content-divider-hori.png) repeat-x bottom left;
+padding-bottom:1em;
+margin-bottom:1em;
+  }
+#checkout-addnote a{
+  display: block;
+  width: 100%;
+  padding-bottom:0.5em;
+  float: left;
+  font-size:0.8em;
+  font-weight:bold;
+  }
+#checkout-addnote textarea{
+  color: #333333;
+  width: 97%;
+  height: 5em;
+  float: left;
+  }
+.js #checkout-addnote textarea{
+  display: none;
+  }
+
+#additional-checkout-buttons{
+  padding: 5px;
+  margin: 1em 0 0 0;
+  width:100%;
+  float:right;
+  }
+#additional-checkout-buttons-label{
+  display: block;
+  margin: 0 20px 8px 0;
+  font-size: 11px;
+  font-weight: bold;
+  width:100%;
+  float:right;
+  text-align:right;
+  }
+  
+/**
+ * End Spotify theme
+ */
+
+
+/* FOOTER */
+#footer #footer-left {
+	width:22.5%;
+	float:left;
+	padding:0 0 2em 0;
+}
+#footer .social {
+	float:left;
+	margin-left:-10px;
+}
+#footer .social li {
+	width:40px !important;
+	float:left;
+}
+#footer .social li a {
+	width:32px;
+	height:32px;
+	margin-right:8px;
+	float:left;
+	display:block;
+	text-indent:-2000em;
+}
+	#footer .social li.facebook a {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/social-icons.png) no-repeat 0 0;
+	}
+	#footer .social li.twitter a {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/social-icons.png) no-repeat -40px 0;
+	}
+	#footer .social li.youtube a {
+		background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/social-icons.png) no-repeat -80px 0;
+	}
+	
+#footer #footer-payment-methods {
+	width:76.5%;
+	margin-left:0;
+	float:left;
+	padding:0 0 2em 0;
+}
+#footer #footer-payment-methods p {
+	font-size:0.7em;
+	padding:0.25em 0 1em 0;
+	color:#A59E8C;
+	float:left;
+	width:100%;
+}
+#footer #footer-payment-methods img {
+	float:left;
+	margin-right:0.5em;
+}
+
+#footer #footer-right {
+	width:76.5%;
+	margin-left:22.5%;
+	float:left;
+	padding:0 0 2em 0;
+	background:url(https://s3-eu-west-1.amazonaws.com/riders-live-cms/Content/images/nav-divider-hori.png) repeat-x top left;
+}
+#footer #footer-right ul,
+#footer #footer-right p {
+	width:100%;
+	float:left;
+	padding-top:1.25em;
+	font-size:0.7em;
+	color:#A59E8C;
+	line-height:1.4em;
+}
+#footer #footer-right ul li {
+	float:left;
+	padding-right:1.25em;
+}
+#footer #footer-right p a {
+	color:#A59E8C;
+}
+#footer #footer-right p a:hover {
+	color:#F30;
+}
+

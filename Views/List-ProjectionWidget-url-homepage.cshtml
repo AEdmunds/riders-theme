@@ -1,0 +1,21 @@
+﻿@{
+    IEnumerable<object> blogPosts = Model.Items;
+}
+
+<div id="blog-list">
+    @if (blogPosts == null || !blogPosts.Any())
+    {
+        <p>@T("There are no posts for this blog.")</p>
+    }
+    else
+    {
+        <ul class="list">
+        @foreach (var blogPost in blogPosts)
+        {
+            <li>
+            @Display(blogPost)    
+            </li>
+        }
+        </ul>
+    }
+</div>

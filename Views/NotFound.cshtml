@@ -1,0 +1,104 @@
+﻿@{
+    
+    WorkContext.Layout.Header.Add(New.Branding(), "5"); // Site name and link to the home page
+    //WorkContext.Layout.Footer.Add(New.ChangeCulture(), "1");
+    WorkContext.Layout.Footer.Add(New._LeagalsMenu(), "5");
+    WorkContext.Layout.Footer.Add(New.BadgeOfHonor(), "5"); // Powered by Orchard
+    //WorkContext.Layout.TripelThird.Add(New.NewsSignup(), "1");
+}
+
+<link rel="stylesheet" type="text/css" media="screen" href="@Url.Content(@"~/Themes/OrangeCheck/Styles/default.css")" />
+
+<div class="container" id="header">
+    <div class="inner">
+        @if (WorkContext.Layout.Header != null) 
+        {
+            @Display(WorkContext.Layout.Header)
+        }
+        @if (WorkContext.Layout.Navigation != null) 
+        {
+            @Display(WorkContext.Layout.Navigation)
+        }
+    </div>   
+</div>
+
+<div class="container" id="content">
+    <div class="inner">
+        <!-- Internal page layout options -->
+        <div class="columns">
+			
+            <!-- Main content -->
+            <div class="right">
+                <!-- full width content -->
+                <div class="column full">
+                    <h1 class="ribbon"><span>Page not found</span></h1>			
+                </div>
+            </div>
+            <!-- 4 column - triple width first column, single width right column -->
+            <div class="right">
+                <div class="column span3">
+                    <p class="intro"> 404 page not found </p>					
+                    <p>Unfortunately the page you're looking for doesn't seem to exist. 
+                        If you think you've found a broken link on out site, then please report it to 
+                        <a href="mailto:rfh@riders.org">rfh@riders.org.</a> Otherwise, please use the 
+                        navigation items on this page to get back on track or simply return to <a href="@Url.Content("~/")">the homepage.</a></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" id="footer">
+    <div class="inner">
+        <div class="columns">
+            <div class="column social">
+                @if (WorkContext.Layout.FooterQuadFirst != null)
+                {
+                    @Display(WorkContext.Layout.FooterQuadFirst)
+                }
+            </div>
+            <div class="right">
+                <div class="column">
+                    @if (WorkContext.Layout.FooterQuadSecond != null)
+                    {
+                        @Display(WorkContext.Layout.FooterQuadSecond)
+                    }
+                </div>
+                <div class="column">
+                    @if (WorkContext.Layout.FooterQuadThird != null)
+                    {
+                        @Display(WorkContext.Layout.FooterQuadThird)
+                    }
+                </div>
+                <div class="column">
+                    @if (WorkContext.Layout.FooterQuadFourth != null)
+                    {
+                        @Display(WorkContext.Layout.FooterQuadFourth)
+                    }
+                </div>
+                <div class="column">
+                    @if (WorkContext.Layout.TripelThird != null) 
+                    {
+                        @Display(WorkContext.Layout.TripelThird)
+                    }
+                </div>
+            </div>   
+           
+            <div class="legals">
+                @if (WorkContext.Layout.Footer != null)
+                {
+                    @Display(WorkContext.Layout.Footer)
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="@Url.Content(@"~/Themes/OrangeCheck/Scripts/jquery-1.8.0.min.js")" type="text/javascript"></script>
+<script src="@Url.Content(@"~/Themes/OrangeCheck/Scripts/jquery.hoverIntent.js")" type="text/javascript"></script>
+<script src="@Url.Content(@"~/Themes/OrangeCheck/Scripts/general.js")" type="text/javascript"></script>

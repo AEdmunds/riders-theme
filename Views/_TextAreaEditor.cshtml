@@ -1,0 +1,28 @@
+﻿@model Orchard.Core.Common.Fields.TextField
+@using Orchard.Core.Common.Settings
+@using Orchard.Fields.Settings;
+@using Orchard.Utility.Extensions;
+@{
+    var settings = Model.PartFieldDefinition.Settings.GetModel<TextFieldSettings>();
+    var form = (string)ViewBag.Form;
+    var displayName = Model.DisplayName;
+    var technicalName = Model.Name;
+    const string prop = "Text";
+    var name = string.Format("{0}.{1}.{2}", form, technicalName, prop);
+    var id = string.Format("{0}_{1}_{2}", form, technicalName, prop);
+}
+<dt>
+    <label for="address">@displayName</label>
+    @if(settings.Required){ <text><span class="required">*</span></text>}
+</dt>
+<dd>
+    <textarea 
+        id="@id" 
+        name="@name"
+        @if (settings.Required) { <text> required="required" </text> }
+        class="text-box multi-line input-validation-error" 
+        rows="2" cols="20" ></textarea>
+    
+    @Html.ValidationMessageFor(m => m.Value)
+    <span class="hint">@settings.Hint</span>
+</dd>

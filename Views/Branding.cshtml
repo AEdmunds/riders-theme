@@ -1,0 +1,9 @@
+﻿@{
+    // adds logo as a link to the top of all pages 
+    var homeUrl = Href("~/");
+}
+
+<a href="@homeUrl" class="logo">
+    <img alt="Riders for health logo" src="@Url.Content(@"~/Themes/OrangeCheck/Content/Images/logo.png")" />
+</a>
+<p><img alt="Moving global health fowards" src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/tag-line.png")" /></p>

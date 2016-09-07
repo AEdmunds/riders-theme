@@ -1,0 +1,53 @@
+﻿@using Orchard.ContentManagement
+@{
+    
+    Script.Require("jQuery");
+    Script.Require("archive");
+    
+    var shapes = ((IEnumerable<dynamic>) Model.Items);
+    
+    var archiveWidget = shapes.FirstOrDefault(x => x.ContentItem.ContentType == "BlogArchives");
+    var termWidget = shapes.FirstOrDefault(x => x.ContentItem.ContentType == "TaxonomyMenu");
+    var otherShapes = shapes.Where(x => x.ContentItem.ContentType != "BlogArchives" && x.ContentItem.ContentType != "TaxonomyMenu");
+
+}
+<div class="zone">
+<form action="@Url.Content(@"~/news-blog/blog/archive")" method="POST" id="filter-form">
+    
+    <fieldset>
+        
+        <ul>
+        
+            <li>
+                
+                @Html.AntiForgeryTokenOrchard()
+                    
+                @if (archiveWidget != null)
+                {
+                    @Display(archiveWidget)        
+                }
+                @if (termWidget != null)
+                {
+                    @Display(termWidget)
+                }
+                
+                <input type="submit" id="submit" value="Go" />
+                
+              
+            </li>
+        
+            <li>
+                Subscribe
+                <a href="@Url.Content(@"/rss-feed")" class="rss">RSS feed</a>                                                        
+            </li>
+    
+        </ul>
+    </fieldset>
+</form>
+
+@foreach (var shape in otherShapes)
+{
+    @Display(shape)
+}
+</div>
+	

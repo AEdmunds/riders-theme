@@ -1,0 +1,32 @@
+﻿@{
+
+    var contentItems = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Content.Items);
+    var projectionList = contentItems.First(x => x.Metadata.Type == "List");
+    var infoGraphics = projectionList.Items;
+    
+} 
+
+@for (int j = 0; j < infoGraphics.Count; j += 3)
+{
+    <div class="right three border">
+        @for (int i = 0; i < 3; i++)
+        {
+            if (j + i < infoGraphics.Count)
+            {
+                if (i > 0)
+                {
+                    <div class="column border">
+                        @Display(infoGraphics[j + i])        
+                    </div>
+                }
+                else
+                {
+                    <div class="column">
+                        @Display(infoGraphics[j + i])        
+                    </div>
+                }
+            }
+
+        }
+    </div>  
+}

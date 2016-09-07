@@ -1,0 +1,24 @@
+﻿@{
+    var link = Model.ContentItem.FundraisingScheme.Link.Value;
+    var image = Model.ContentItem.FundraisingScheme.Image;
+    var title = Model.ContentItem.TitlePart.Title;
+    var html = Model.ContentItem.BodyPart.Text;
+       
+}
+
+<li>
+    @if (image != null)
+    {
+        <a href="@link">
+            @Display(New.ImageField(ImageField:image))
+        </a>
+    }
+    <h2>
+        <a href="@link">
+            @title
+        </a>
+    </h2>
+    
+    @Html.Raw(html)
+
+</li>

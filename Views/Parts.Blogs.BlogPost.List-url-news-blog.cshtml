@@ -1,0 +1,159 @@
+﻿@using System.Configuration
+@using OrangeCheck.Utils
+@using Orchard.Comments.Models
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.Utility.Extensions
+@using Pnv.ImageUploadField.Fields
+@{
+    IEnumerable<dynamic> blogPosts = Model.ContentItems;
+    Model.ContentItems.Classes.Add("list");
+    var counter = 0;
+    
+    
+    // ****** no longer used, replaced by Widget recent Blog posts - url news-blog ***********
+    
+}
+
+
+@if (blogPosts == null || !blogPosts.Any())
+{
+    <p>@T("There are no posts for this blog.")</p>
+}
+else
+{
+    foreach (var blogPost in blogPosts)
+    {
+
+        if (blogPost.Title != null)
+        {
+            Layout.Title = blogPost.Title;
+        }
+
+        ImageUploadField image = null;
+        if (blogPost.ContentItem.BlogPost.Image != null) {
+            image = blogPost.ContentItem.BlogPost.Image;
+        }
+
+        var date = string.Format("{0:dd MMMM, yyyy}", ((DateTime)blogPost.ContentItem.CommonPart.CreatedUtc));
+
+        Orchard.ContentManagement.ContentItem contentItem = blogPost.ContentItem;
+        string title = blogPost.Title.ToString();
+
+        string bodyHtml = blogPost.ContentItem.BodyPart.Text.ToString();
+        var body = new HtmlString(Html.Excerpt(bodyHtml, 400).ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>"));
+        var newsBody = new HtmlString(Html.Excerpt(bodyHtml, 200).ToString());
+
+        if (blogPost.Blog.Name == "News")
+        {
+            if (counter < 2)
+            {
+                counter++;
+
+                <div class="article">	
+                    <div class="image-container">
+                        @Display(New.ImageField(ImageField:image))
+                        <div class="copy">
+                            <h2 class="ribbon large">
+                                <span>
+                                    @Html.ItemDisplayLink(title, contentItem)
+                                </span>
+                            </h2>
+                            <h3 class="ribbon date"><span>@date</span></h3>
+                        </div>
+                    </div>
+                    <p class="intro">
+                        @newsBody
+                    </p>
+                    
+                    @Html.ItemDisplayLink(T("Read full article >").ToString(), contentItem)
+                </div>
+            }
+            else
+            {
+                <div class="article small">
+                     @Display(New.ImageField(ImageField:image, Width:"169"))
+                    <h2>
+                        @Html.ItemDisplayLink(title, contentItem)
+                    </h2>
+						<p class="date">@date</p>
+						<p>@newsBody @Html.ItemDisplayLink(T("read more").ToString(), contentItem)</p>
+                </div>
+            }
+        }
+        else
+        {
+            if (counter == 0)
+            {
+                counter++;
+                var description = blogPost.Blog.Description;
+                                
+                <div class="speech dark bleft">
+                    <p class="intro"><em>Our blog</em> 
+                        @description
+                    </p>
+			        <span></span>
+		        </div>
+            }
+            
+            
+            <h2>@Html.ItemDisplayLink(title, contentItem)</h2>
+		        <h3 class="date">@date</h3>
+		        <div class="speech light tright">
+			        <p class="intro">@body @Html.ItemDisplayLink(T("read more").ToString(), contentItem)</p>
+                    
+                    @{
+                       var terms = blogPost.ContentItem.TermsPart.Terms;
+	                  }
+                    
+                    <ul class="blog-details">
+                        @if (terms != null)
+                        {
+                            <li>
+                                  @Display(ShapeHelper.Find((Shape)blogPost, "Fields_Contrib_TaxonomyField"))
+                            </li>    
+                        }
+                        
+                        <li>
+                            <strong>Author</strong>
+					        <p>@blogPost.ContentItem.ContentAuthorPart.AuthorName</p>
+                            @if (((CommentsPart)blogPost.ContentItem.CommentsPart).Comments.Any())
+                            {
+                                string commentCount = T.Plural("1 Comment", "{0} Comments", ((CommentsPart)blogPost.ContentItem.CommentsPart).Comments.Count()).ToString();
+                                string url = string.Format("{0}#comments", @Url.ItemDisplayUrl(contentItem)); 
+                                <a href="@url">@commentCount</a>
+                            }
+                            else
+                            {
+                                string leaveComment = T("Leave a comment").ToString();
+                                string url = string.Format("{0}#comments", @Url.ItemDisplayUrl(contentItem)); 
+                                <a href="@url">@leaveComment</a>
+                            }
+                             
+                            @if (blogPost.ContentItem.ContentAuthorPart.Photo != null)
+                            {
+                                 @Display(New.ImageField(ImageField:blogPost.ContentItem.ContentAuthorPart.Photo))
+                            }
+                            else
+                            {
+                                <img src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/temp/blog-author-riders.png")" alt="riders logo" />
+                            }
+                        </li>
+			        </ul>
+			        <span></span>
+		        </div>
+        }
+    }
+
+    if (blogPosts.First().Blog.Name == "News")
+    {
+        <a href="@Url.Content(@"~/news-blog/news")" class="highlight">See all news &gt;</a>
+    }
+    else
+    {
+        <a href="@Url.Content(@"~/news-blog/blog")" class="highlight">See all blog posts &gt;</a>
+    }
+
+}                   
+
+
+

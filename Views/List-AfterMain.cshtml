@@ -1,0 +1,18 @@
+﻿@{
+    var items = (IList<dynamic>) Model.Items;
+    
+}
+
+@for (int j = 0; j < items.Count; j += 3)
+{
+    <div class="right three border">
+        @for (int i = 0; i < 3; i++)
+        {
+            if (j + i < items.Count)
+            {
+                @Display(items[j + i])
+            }
+
+        }
+    </div>  
+}

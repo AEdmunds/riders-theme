@@ -1,0 +1,111 @@
+﻿@{
+    Func<dynamic, dynamic> Zone = x => Display(x); 
+}
+
+@Html.Partial("_Header")
+@Html.Partial("Parts/Local")
+
+@if (Model.Messages != null)
+{
+     @Zone(Model.Messages)
+}
+
+<div class="container" id="header">
+    <div class="inner">
+        @if (Model.Header != null)
+        {
+            @Zone(Model.Header)
+        }
+        @if (Model.Navigation != null) 
+        {
+            @Zone(Model.Navigation)
+        }
+    </div>
+</div>
+
+@if (Model.Featured != null)
+{
+    <div class="container" id="hero">
+        <div class="inner">
+            @Zone(Model.Featured)
+        </div>
+    </div>
+}
+ 
+
+<div class="container" id="content">
+    <div class="inner">
+        <div class="columns">
+            
+            @*Left navigation for sub pages *@
+            @if (Model.AsideFirst != null) 
+            {
+                <div class="column left-nav">
+                    <!-- Shows left nav on mobile devices -->
+                    <a href="#" class="section">> In this section</a>
+                    
+                    @Zone(Model.AsideFirst)
+                </div>
+            }
+       
+            @*Navigation breadcrumbs and header usually up here *@
+            @if (Model.BeforeMain != null)
+            {
+                <div class="right">
+                    <!-- full width content -->
+                    <div class="column full">
+                        @Zone(Model.BeforeMain)
+                    </div>
+                </div>
+            }
+            
+            @* used for our people main 4 people widget projection *@
+            @if (Model.BeforeContent != null)
+            {
+                @Zone(Model.BeforeContent)
+            }
+       
+            
+            
+            @if (Model.Content != null)
+            {
+                @Zone(Model.Content)
+            }
+        
+             
+            
+            @if (Model.AfterContent != null)
+            {
+                @* for use on where we work summary page *@
+                <div class="right contact">
+				    <div class="column span2">
+                        @Zone(Model.AfterContent)
+                    </div>
+                </div>
+            }
+            
+             @* Side bar right for widgets only *@
+                @if (Model.AsideSecond != null)
+                {
+                    <div class="column span2">	
+                        @Zone(Model.AsideSecond)	
+                    </div>
+                }
+            
+            
+            
+            
+            @* here is where we put the feature content for sub pages *@
+            @if (Model.AfterMain != null)
+            {
+                @Zone(Model.AfterMain)
+            }
+            
+
+
+        </div>
+    </div>
+</div>
+
+@*Footer section *@
+@Html.Partial("_Footer")

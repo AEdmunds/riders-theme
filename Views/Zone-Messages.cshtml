@@ -1,0 +1,14 @@
+﻿@{
+    Style.Require("bootstrap");
+
+    Script.Require("jQuery");
+    Script.Require("bootstrap");
+
+}
+
+<div class="alert fade in clearfix">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    
+    <p>@DisplayChildren(Model)</p>
+
+</div>	

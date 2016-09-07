@@ -1,0 +1,13 @@
+﻿<root>
+  <output path="main.min.0.1.0.css">
+    <input path="bootstrap.css"/>
+    <input path="default.css"/>
+  </output>
+  <output path="home.min.0.1.0.css">
+    <input path="bootstrap.css"/>
+    <input path="default.css"/>
+    <input path="royalslider/default/rs-default.css"/>
+    <input path="royalslider/royalslider.css"/>
+    <input path="counter.css"/>
+  </output>
+</root>

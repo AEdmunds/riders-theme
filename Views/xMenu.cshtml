@@ -1,0 +1,54 @@
+﻿@{
+    //Model.Classes.Clear();
+    
+
+    //if (Model.ContentItem.WidgetPart.Name != null)
+    //{/
+    //    Model.Classes.Add(Model.ContentItem.WidgetPart.Name);
+   // }
+    
+    var tag = Tag(Model, "ul");
+    
+    var items = (List<dynamic>)Enumerable.Cast<dynamic>(Model.Items);
+
+    // Hack - this is to remove any duplicate menu items 
+    // child menu items render in the top menu, 
+    // this code looks at the child menu i
+    
+    var itemsNames = items.Select(item => item.Text.Text).Cast<string>().ToList();
+
+    var itemsToRemove = new List<dynamic>();
+    
+    foreach (var item in items)
+    {
+        foreach (var subItem in item.Items)
+        {
+            if (itemsNames.Contains(subItem.Text.Text))
+            {
+                var itemToRemove = items.FirstOrDefault(x => x.Text.Text == subItem.Text.Text);
+                if (itemToRemove != null)
+                {
+                    itemsToRemove.Add(itemToRemove);
+                }
+            }
+        }
+    }
+
+    foreach (var r in itemsToRemove)
+    {
+        items.Remove(r);
+    }
+   
+
+    if (items.Any()) {
+        items[0].Classes.Add("first");
+        items[items.Count - 1].Classes.Add("last");
+    }    
+    
+    
+}
+
+@tag.StartElement
+   @DisplayChildren(Model) 
+@tag.EndElement
+

@@ -1,0 +1,32 @@
+﻿@model Orchard.Fields.Fields.BooleanField
+@{
+    var form = (string)ViewBag.Form;
+    var displayName = Model.DisplayName;
+    const string prop = "Value";
+    var name = string.Format("{0}.{1}.{2}", form, displayName, prop);
+    var id = string.Format("{0}_{1}_{2}", form, displayName, prop);
+}
+
+<dt>
+    <label for="title">
+        @displayName
+    </label>
+</dt>
+<dd class="small">
+    <select id="@id" name="@name">
+    
+        @if (Model.Value.HasValue && Model.Value.Value)
+        {
+            <option selected="selected" value="True">Yes</option>
+            <option value="False">No</option>
+        }
+        else
+        {
+            <option value="True">Yes</option>
+            <option selected="selected" value="False">No</option>
+        }
+    
+    </select>
+    @Html.ValidationMessageFor(m => m.Value)
+</dd>
+

@@ -1,0 +1,48 @@
+﻿@model Orchard.Fields.Fields.EnumerationField
+@using Orchard.Fields.Settings;
+@{
+    var settings = Model.PartFieldDefinition.Settings.GetModel<EnumerationFieldSettings>();
+
+    var options = (!String.IsNullOrWhiteSpace(settings.Options)) 
+                  ? settings.Options.Split(new string[] { Environment.NewLine }, StringSplitOptions.None) 
+                  : new string[] { "Please select ..." };
+    
+    var form = (string)ViewBag.Form;
+    var modelName = Model.Name;
+    var displayName = Model.DisplayName;
+    const string prop = "Value";
+    var name = string.Format("{0}.{1}.{2}", form, modelName, prop);
+    var id = string.Format("{0}_{1}_{2}", form, modelName, prop);
+    
+}
+<dt>
+    <label for="title">
+        @displayName
+    </label>
+    @if(settings.Required){ <text><span class="required">*</span></text>}
+</dt>
+
+<dd class="small">
+    <select id="@id" name="@name" @if (settings.Required) { <text> required="required" </text> } >
+    
+        @if (Model.Value == null)
+        {
+            <option value="">Please select</option>
+        }
+
+        @foreach (var item in options)
+        {
+            if (item == Model.Value)
+            {
+                <option selected="selected">@item</option>
+            }
+            else
+            {
+                <option>@item</option>
+            }
+        }
+    </select>
+    
+    @Html.ValidationMessageFor(m => m.Value)
+    <span class="hint">@settings.Hint</span>
+</dd>

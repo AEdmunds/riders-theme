@@ -1,0 +1,57 @@
+﻿@using Orchard.ContentManagement
+@* keeps the rendering of content page simple  *@
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string) title);
+    }
+
+
+    var feature1Title = Model.ContentItem.Homepage.Feature1Title.Value;
+    var feature1Image = Model.ContentItem.Homepage.Feature1Image;
+    var feature1LinkUrl = Model.ContentItem.Homepage.Feature1Link.Value;
+    var feature1Text = Model.ContentItem.Homepage.Feature1Text.Value;
+
+
+    var feature2Title = Model.ContentItem.Homepage.Feature2Title.Value;
+    var feature2Image = Model.ContentItem.Homepage.Feature2Image;
+    var feature2LinkUrl = Model.ContentItem.Homepage.Feature2Link.Value;
+    var feature2Text = Model.ContentItem.Homepage.Feature2Text.Value;
+
+    var mediaParts = Model.ContentItem.ImageGalleryPart.Images.MediaParts;
+
+    Style.Require("image-gallery");
+    Style.Require("royal");
+    Style.Require("royal-default");
+
+    Script.Require("royal");
+    Script.Require("royal-init-home");
+    
+    WorkContext.Layout.Featured.Add(New.ImageGalleryHomePage(MediaParts: mediaParts));
+        
+}
+
+
+<div class="column">
+    <h2 class="ribbon show-text"><span>
+                                     <a href="@feature1LinkUrl">@feature1Title</a>
+                                 </span></h2>				
+    <div class="image-container show-text">
+        @Display(New.ImageField(ImageField:feature1Image))
+        <p>@feature1Text ... <a href="@feature1LinkUrl" class="highlight">Read more ></a></p>
+    </div>
+</div>
+<div class="column">
+    <h2 class="ribbon show-text">
+        <span>
+            <a href="@feature2LinkUrl">@feature2Title</a>
+        </span>
+    </h2>				
+    <div class="image-container show-text">
+        @Display(New.ImageField(ImageField:feature2Image))
+        <p>@feature2Text ... <a href="@feature2LinkUrl" class="highlight">Find out more ></a></p>
+    </div>
+</div>
+

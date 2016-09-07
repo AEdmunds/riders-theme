@@ -1,0 +1,22 @@
+﻿@using Orchard.Utility.Extensions;
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+    
+    
+}
+<div class="column full">
+    
+    @Display(Model.Header)
+    
+    @Display(Model.Content)
+
+    @if(Model.Footer != null) {
+        @Display(Model.Footer)
+    }
+
+</div>

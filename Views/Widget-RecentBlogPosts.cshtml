@@ -1,0 +1,29 @@
+﻿@using System.Collections
+@using Orchard.ContentManagement
+@using Orchard.DisplayManagement.Shapes;
+
+@if (Request.Url != null 
+    && Request.Url.AbsolutePath != Url.Content("~/")
+    && Request.Url.AbsolutePath != Url.Content(@"~/news-blog"))
+{
+
+    var contentItems = (IList<dynamic>) Enumerable.Cast<dynamic>(Model.Content.Items);
+    var recentPostsWidget = contentItems.First(x => x.Metadata.Type == "Parts_Blogs_RecentBlogPosts");
+    IEnumerable<dynamic> blogPosts = recentPostsWidget.ContentItems.ContentItems;
+
+    foreach (var item in blogPosts)
+    {
+        var date = string.Format("{0:dd MMMM, yyyy}", ((DateTime) item.ContentItem.CommonPart.CreatedUtc));
+
+        ContentItem contentItem = item.ContentItem;
+        string title = item.Title.ToString();
+
+        <p>@Html.ItemDisplayLink(title, contentItem)@date</p>
+
+    }
+}
+else
+{
+    @Display(Model.Content)
+}
+

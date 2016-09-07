@@ -1,0 +1,49 @@
+﻿
+@using OrangeCheck.Utils
+@using Orchard.DisplayManagement.Shapes
+@using Orchard.Utility.Extensions;
+@{
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+
+    var contentItems = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Content.Items);
+    var projectionList = contentItems.First(x => x.Metadata.Type == "List");
+    var items = (IList<dynamic>)projectionList.Items;
+    
+    
+}
+
+<div class="column full">
+    
+    @for (int j = 0; j < items.Count; j += 4)
+    {
+
+        <ul class="list partners">
+            @for (int i = 0; i < 4; i++)
+            {
+                if (j + i < items.Count)
+                {
+                    if (i > 0)
+                    {
+                        <li>
+                            @Display(items[j + i])        
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="first">
+                            @Display(items[j + i])        
+                        </li>
+                    }
+                }
+            }
+        </ul>
+        
+    }
+
+</div>
+

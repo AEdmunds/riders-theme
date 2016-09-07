@@ -1,0 +1,56 @@
+﻿@model Orchard.Fields.Fields.EnumerationField
+@using Orchard.Fields.Settings;
+@{
+    var settings = Model.PartFieldDefinition.Settings.GetModel<EnumerationFieldSettings>();
+
+    string[] options = (!String.IsNullOrWhiteSpace(settings.Options)) ? settings.Options.Split(new string[] { System.Environment.NewLine }, StringSplitOptions.None) : new string[] { };
+    var form = (string)ViewBag.Form;
+    var modelName = Model.Name;
+    const string prop = "Value";
+    var name = string.Format("{0}.{1}.{2}", form, modelName, prop);
+    var chkname = name + "Chk";
+  
+     int index = 0;
+}
+
+<dt>
+    <label for="Countries">
+        @modelName
+    </label>
+    @if(settings.Required){ <text><span class="required">*</span></text>}
+</dt>
+<dd>
+    <dd class="small">
+
+        @foreach (var option in options) {
+            index++;
+            if (!string.IsNullOrWhiteSpace(option)) {
+                <div>
+                    <input type="checkbox" 
+                           name="@chkname" 
+                           value="@option" @((Model.SelectedValues != null && Model.SelectedValues.Contains(option)) 
+                                                 ? "checked=\"checked\"" : "") 
+                           class="check-box" 
+                           id="@Html.FieldIdFor(m => m.SelectedValues)-@index" />
+            
+                    <label class="forcheckbox" for="@Html.FieldIdFor(m => m.SelectedValues)-@index">@T(option)</label>
+                </div>
+            }
+        }
+
+        @Html.ValidationMessageFor(m => m.Value)
+        <span class="hint">@settings.Hint</span>
+        
+        <input type="hidden" name="@name" id="@name"/>
+        
+        <script type="text/javascript">
+            $(function () {
+                $('[name="@chkname"]').change(function () {
+                    $('[id="@name"]').val($('[name="@chkname"]').serialize().replace(/@chkname=/g, '').replace(/&/g, ', '));
+                });
+            });
+        </script>
+        
+
+    </dd>
+</dd>

@@ -1,0 +1,33 @@
+﻿@model Orchard.Fields.Fields.InputField
+@using Orchard.Fields.Settings;
+@using Orchard.Utility.Extensions;
+@{
+    var settings = Model.PartFieldDefinition.Settings.GetModel<InputFieldSettings>();
+    var form = (string)ViewBag.Form;
+    var displayName = Model.DisplayName;
+    var displayNameNoSpace = displayName.Replace(" ", "");
+    const string prop = "Value";
+    var name = string.Format("{0}.{1}.{2}", form, displayNameNoSpace, prop);
+    var id = string.Format("{0}_{1}_{2}", form, displayNameNoSpace, prop);
+}
+<dt>
+    <label for="name">@displayName</label>
+    @if(settings.Required){ <text><span class="required">*</span></text>}
+</dt>
+<dd>
+    <input 
+        type="@settings.Type.ToString().ToLower()" 
+        id="@id" 
+        name="@name"
+        value="@Model.Value"
+        @if(!String.IsNullOrWhiteSpace(settings.Title)) {<text> title="@settings.Title"</text>} 
+        @if(settings.Required) {<text> required="required"</text> }
+        @if(settings.AutoFocus) {<text> autofocus="autofocus"</text> }
+        @if(settings.AutoComplete) {<text> autocomplete="on"</text> }
+        @if(!string.IsNullOrWhiteSpace(settings.Placeholder)) {<text> placeholder="@settings.Placeholder"</text>}
+        @if(!string.IsNullOrEmpty(settings.Pattern)) {<text> pattern="@settings.Pattern"</text>}
+        @if(!string.IsNullOrEmpty(settings.EditorCssClass)) {<text> class="@settings.EditorCssClass"</text>} else {<text> class="textMedium"</text>}
+        @if(settings.MaxLength > 1) {<text> maxlength="@settings.MaxLength.ToString()"</text>}  />
+    @Html.ValidationMessageFor(m => m.Value)
+    <span class="hint">@settings.Hint</span>
+</dd>

@@ -1,0 +1,10 @@
+﻿@using Orchard.MediaLibrary.Models
+@{
+    var mediaPart = (MediaPart)Model.MediaPart;  
+}
+
+<a class="rsImg" data-rsdelay="1000" data-rsbigimg="@mediaPart.MediaUrl" href="@mediaPart.MediaUrl">
+    <span>@mediaPart.Caption</span>
+    <img width="114" height="76" class="rsTmb" 
+    src="@Display.ResizeMediaUrl(Path:mediaPart.MediaUrl, Width: 114, Height: 76)">
+</a>

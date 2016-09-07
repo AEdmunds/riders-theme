@@ -1,0 +1,21 @@
+﻿@using Orchard.ContentManagement
+@{
+
+    var image = Model.ContentItem.Experience.Image;
+    var contentItem = Model.ContentItem;
+    var title = Model.ContentItem.TitlePart.Title;
+
+    var body = Model.ContentItem.BodyPart.Text;
+    
+
+}
+
+
+<li>
+	@Display(New.ImageField(ImageField:image))
+    <h2>
+        @title
+        @*@Html.ItemDisplayLink((string)title, (IContent)contentItem)*@
+    </h2>
+	@Html.Raw(body)
+</li>

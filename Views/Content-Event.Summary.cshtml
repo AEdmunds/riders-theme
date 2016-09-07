@@ -1,0 +1,41 @@
+﻿@using Orchard.ContentManagement
+@{
+
+    var image = Model.ContentItem.Event.Image;
+    var title = Model.ContentItem.TitlePart.Title;
+    var body = Model.ContentItem.BodyPart.Text;
+    var link = Model.ContentItem.Event.Link.Value;
+    
+    var url = link;
+
+    
+    if (link != null && !link.ToString().ToLower().StartsWith("http"))
+    {
+        if (link.ToString().ToLower().StartsWith("/"))
+        {
+            url = Url.Content("~" + link);
+        }
+        else
+        {
+            url = Url.Content("~/" + link);
+        }
+    }
+
+}
+
+
+<li>
+	@Display(New.ImageField(ImageField:image))
+    <h2>
+        @if (link != null)
+        {
+            <a href="@url">@title</a>
+        }
+        else
+        {
+            @title
+        }
+        
+    </h2>
+	@Html.Raw(body)
+</li>

@@ -1,0 +1,47 @@
+﻿@{
+    var detailId = "detail-" + Model.Title.ToString().Replace(" ", "-");
+
+    var imgTechnicians = Url.Content(@"~/Themes/OrangeCheck/Content/images/maps/technicians.png");
+    var imgWorkshops = Url.Content(@"~/Themes/OrangeCheck/Content/images/maps/workshops.png");
+    var imgKmPerMonth = Url.Content(@"~/Themes/OrangeCheck/Content/images/maps/km-travelled.png");
+    var imgLivesTouched = Url.Content(@"~/Themes/OrangeCheck/Content/images/maps/lives-touched.png");
+    
+}
+
+<div class="detail" id="@detailId">
+	<h2><span>@Model.Start</span> @Model.Year</h2>
+	<div class="bracket"><span></span></div>
+	<div class="column first">
+		<div class="image-container">
+			<img src="@imgTechnicians" />
+		</div>
+		<h2 class="ribbon large"><span>@Model.Technicians</span></h2>
+		<h3 class="date">@T.Plural("Technician", "Technicians", (int)Model.Technicians)</h3>
+	</div>
+	<div class="column">
+		<div class="image-container">
+			<img src="@imgWorkshops" />
+		</div>
+		<h2 class="ribbon large"><span>@Model.Workshops</span></h2>
+		<h3 class="date">@T.Plural("Workshop", "Workshops", (int)Model.Workshops)</h3>
+	</div>
+	<div class="column">
+		<div class="image-container">
+			<img src="@imgKmPerMonth" />
+		</div>
+		<h2 class="ribbon large"><span>@Model.KPerMonth</span></h2>
+		<h3 class="date">Kilometres travelled per month</h3>
+	</div>
+	<div class="column">
+	    <div class="image-container">
+	        <img src="@imgLivesTouched" />
+	    </div>
+        @if (Model.LivesTouched != "0m")
+        {
+            <h2 class="ribbon large"><span>@Model.LivesTouched</span></h2>    
+        }
+		<h3 class="date">Population covered</h3>
+	</div>
+</div>
+
+

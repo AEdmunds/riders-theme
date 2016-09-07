@@ -1,0 +1,8 @@
+﻿@using Orchard.Fields.Settings;
+@using Orchard.Utility.Extensions;
+@{
+    string value = (string)Model.ContentField.Value;
+    if (!string.IsNullOrEmpty(value)) {
+        <iframe class="hero" width="770" height="433" src="@value" frameborder="0" allowfullscreen></iframe>	
+    }
+}

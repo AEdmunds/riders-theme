@@ -1,0 +1,81 @@
+﻿@using System.Globalization
+@using Orchard.Utility.Extensions;
+@{
+
+    Script.Require("jQuery8");
+    Script.Require("image-map");
+
+    Script.Require("maps");
+
+    var title = Model.ContentItem.TitlePart.Title;
+
+    if (title != null)
+    {
+        Html.TitleForPage((string)title);
+    }
+
+    var contentItems = (IList<dynamic>)Enumerable.Cast<dynamic>(Model.Content.Items);
+    var projectionList = contentItems.First(x => x.Metadata.Type == "List");
+    var countries = (IList<dynamic>)projectionList.Items;
+    
+    var tech = new decimal(0);
+    var workshops = new decimal(0);
+    var kPerMonth = new decimal(0);
+    var livesTouched = new decimal(0);
+
+    foreach (var country in countries)
+    {
+        tech += (decimal?)country.ContentItem.CountryProfile.Technicians.Value ?? 0;
+        workshops += (decimal?)country.ContentItem.CountryProfile.Workshops.Value ?? 0;
+        kPerMonth += (decimal?)country.ContentItem.CountryProfile.KmPerMonth.Value ?? 0;
+        livesTouched += (decimal?)country.ContentItem.CountryProfile.LivesTouched.Value ?? 0;
+                
+    }
+
+    var strkPerMonth = kPerMonth.ToString(CultureInfo.InvariantCulture) + "k";
+    var strlivesTouched = livesTouched.ToString(CultureInfo.InvariantCulture) + "m";
+   
+    WorkContext.Layout.AfterContent.Add(
+        New.CountrySummaryStats(
+           Title: "",
+           Start: "",
+           Year: null,
+           Technicians: tech,
+           Workshops: workshops,
+           KPerMonth: strkPerMonth,
+           LivesTouched: strlivesTouched
+           ), "5");
+    
+}
+
+
+<div class="column full map">
+    @Html.Hidden("mapUrl", @Url.Content(@"~/Themes/OrangeCheck/Content/images/maps/"))
+    @countries.Count()
+    <h1 class="ribbon"><span>@title</span></h1>
+    <h2 class="ribbon large"><span>Sub-Saharan Africa</span></h2>
+					
+    <img id="africa" src="@Url.Content(@"~/Themes/OrangeCheck/Content/images/maps/default.png")" width="790" height="539" usemap="#africa-map" />
+    <map name="africa-map">
+        <area shape="poly" coords="225,201,229,205,230,211,235,208,242,223,241,235,212,213" href="@Url.Content(@"~/where-we-work/liberia")" alt="Liberia" title="Liberia">
+        <area shape="poly" coords="604,314,590,307,592,301,566,287,565,279,565,273,572,264,566,251,563,246,573,243,586,245,599,250,616,245,623,247,616,254,617,268,617,285,621,291,610,299," href="@Url.Content(@"~/where-we-work/Kenya")" alt="Kenya" title="Kenya"/>
+        <area shape="poly" coords="558,351,560,361,557,375,553,384,566,390,563,399,570,411,576,396,571,385,565,380,565,366,565,358," href="@Url.Content(@"~/where-we-work/Malawi")" alt="Malawi" title="Malawi"/>
+        <area shape="poly" coords="497,415,508,431,522,446,539,449,550,438,552,430,552,422,554,406,535,401,528,399,520,406,510,413," href="@Url.Content(@"~/where-we-work/Zimbabwe")" alt="Zimbabwe" title="Zimbabwe"/>
+        <area shape="poly" coords="529,343,544,347,559,358,557,374,552,382,542,391,535,398,536,392,526,400,524,406,511,411,498,415,489,411,483,411,473,402,472,377,487,377,489,363,499,366,511,368,522,375,531,381,533,371,522,368,524,358,522,348," href="@Url.Content(@"~/where-we-work/Zambia")" alt="Zambia" title="Zambia"/>
+        <area shape="poly" coords="514,481,530,492,527,509,511,517,497,509,493,496,504,486," href="@Url.Content(@"~/where-we-work/Lesotho")" alt="Lesotho" title="Lesotho"/>
+        <area shape="poly" coords="329,230,328,211,337,198,335,187,344,175,363,178,384,179,409,177,417,189,406,206,394,231,383,226,371,244,351,245,341,231,378,235,398,180,400,217," href="@Url.Content(@"~/where-we-work/Nigeria")" alt="Nigeria" title="Nigeria"/>
+        <area shape="poly" coords="191,181,203,180,215,181,221,173,220,165,206,159,191,158,184,159,184,171," href="@Url.Content(@"~/where-we-work/the-gambia")" alt="The Gambia" title="The Gambia"/>
+    </map>
+
+    <div class="info">
+        <div id="info-default">
+            <p>Riders for Health work in sub-Saharan Africa, managing and maintaining vehicles for health-focused partners. Our expertise in transport management enables health workers to deliver vital healthcare to rural communities on a reliable and cost-effective basis.</p>
+            <p>We currently have seven programmes in Africa. To find out more, click on any of the highlighted countries on the map to view that country's profile.</p>    
+        </div>
+        @Display(Model.Content)
+    </div>
+    				
+</div>
+
+
+

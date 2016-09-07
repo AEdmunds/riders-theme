@@ -1,0 +1,28 @@
+/*
+
+Styling the counter itself.
+Set image paths accordingly.
+
+THIS YOU NEED TO KEEP.
+
+So you can have multiple counters on a page, just make sure each one has a class of "flip-counter".
+
+*/
+
+#content .flip-counter {
+    width:100%;
+    float:left;
+}
+#content .flip-counter ul.cd{
+    float:left;
+    list-style-type:none;
+    margin:0;
+    padding:0;
+}
+#content .flip-counter li{
+    background:url(../Content/images/sprite.png) 0 0 no-repeat;
+    padding:0;
+}
+#content .flip-counter li.t{background-position:0 0;width:40px;height:22px}
+#content .flip-counter li.b{background-position:0 0;width:40px;height:22px}
+#content .flip-counter li.s{display:none}

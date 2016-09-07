@@ -1,0 +1,72 @@
+﻿
+@using Orchard.ContentManagement
+@using Orchard.Core.Navigation.Models
+@{
+    // odd formatting in this file is to cause more attractive results in the output.
+    var items = Enumerable.Cast<dynamic>((System.Collections.IEnumerable)Model);
+
+    var contentItem = ((IContent)Model.Content) == null ? null : ((IContent)Model.Content).ContentItem;
+
+    string liClass = null;
+    if (contentItem != null)
+    {
+        var classNamePart = contentItem.Parts.SelectMany(p => p.Fields).ToList();
+
+        if (classNamePart.Any())
+        {
+            var classNameField = classNamePart.FirstOrDefault(f => f.Name == "ClassName");
+            if (classNameField != null)
+            {
+                liClass = classNameField.Storage.Get<string>(null);
+            }
+        }
+    }
+}
+@{
+    if (!HasText(Model.Text)) {
+        @DisplayChildren(Model)
+    } 
+    else 
+    {
+        string requestUrl = Request.Path.Replace(Request.ApplicationPath, string.Empty).TrimEnd('/').ToUpperInvariant();
+        string modelUrl = Model.Href.ToString().Replace(Request.ApplicationPath, string.Empty).TrimEnd('/').ToUpperInvariant();
+
+        if ((!string.IsNullOrEmpty(modelUrl) && requestUrl.StartsWith(modelUrl)) || requestUrl == modelUrl)
+        {
+            Model.Classes.Add("selected");
+        }
+
+        if (!string.IsNullOrEmpty(liClass))
+        {
+            Model.Classes.Add(liClass);
+        }
+
+        var tag = Tag(Model, "li");
+
+
+       
+        if (Model.Item.Culture == null || Model.Item.Culture == WorkContext.CurrentCulture) {
+            @tag.StartElement
+
+            @* morphing the shape to keep Model untouched*@
+            Model.Metadata.Alternates.Clear();
+            Model.Metadata.Type = "MenuItemLink";
+
+            if (Model.Menu.Metadata.Type == "Breadcrumb" && Model.Classes.Contains("last")) {
+                @Model.Text
+            }
+            else {
+                <a href="@Model.Href" title="@Model.Text">@Model.Text</a>
+            }
+
+            if (items.Any()) {
+                <ul>
+                    @DisplayChildren(Model)
+                </ul>
+            }
+            @tag.EndElement
+        }
+        
+    }
+}
+

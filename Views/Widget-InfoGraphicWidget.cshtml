@@ -1,0 +1,29 @@
+﻿@using Orchard.ContentManagement
+@using Pnv.ImageUploadField.Fields
+@{
+
+    var linkText = Model.ContentItem.InfoGraphicPart.LinkText.Value;
+    var imageField = (ImageUploadField)Model.ContentItem.InfoGraphicPart.Image;
+    
+    var contentItems = (IEnumerable<IContent>)Model.ContentItem.InfoGraphicPart.Link.ContentItems;
+    
+    
+}
+
+@if (contentItems.Any())
+{
+    var linkContent = contentItems.First();
+
+    <a href="@Url.ItemDisplayUrl(linkContent)">
+        <p>
+            @Display(New.ResizeImageField(ImageField:imageField, Width:165, Height:200))
+        </p>
+    </a>
+    <a class="highlight" href="@Url.ItemDisplayUrl(linkContent)">@linkText</a>
+}
+else
+{
+    <p>
+          @Display(New.ResizeImageField(ImageField:imageField, Width:165, Height:200))
+    </p>
+}

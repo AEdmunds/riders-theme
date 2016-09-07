@@ -1,0 +1,33 @@
+﻿@using System.Configuration
+@using OrangeCheck.Utils
+@using Orchard.Core.Common.Models
+@using Orchard.Utility.Extensions;
+@{
+    if (Model.Title != null)
+    {
+        Layout.Title = Model.Title;
+    }
+
+    
+    var image = Model.ContentItem.BlogPost.Image;
+
+    var date = string.Format("{0:dd MMMM, yyyy}", ((DateTime) Model.ContentItem.CommonPart.CreatedUtc));
+
+    Orchard.ContentManagement.ContentItem contentItem = Model.ContentItem;
+    string title = Model.Title.ToString();
+    
+    string bodyHtml = Model.ContentItem.BodyPart.Text.ToString();
+    var body = new HtmlString(Html.Excerpt(bodyHtml, 200).ToString().Replace(Environment.NewLine, "</p>" + Environment.NewLine + "<p>")); 
+}
+
+@Display(New.ImageField(ImageField:image))
+
+
+<h2>@Html.ItemDisplayLink(title, contentItem)</h2>
+
+<p class="date">
+    @date
+</p>
+
+<p>@body @Html.ItemDisplayLink(T("read more").ToString(), contentItem)</p>
+   

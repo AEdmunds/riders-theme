@@ -1,0 +1,72 @@
+﻿@using Orchard.Blogs.Extensions;
+@using Orchard.Blogs.Models;
+@{
+    IEnumerable<KeyValuePair<ArchiveData, int>> archives = Model.Archives;
+    var dateTimeLocalization = WorkContext.Resolve<Orchard.Core.Shapes.Localization.IDateTimeLocalization>();
+    var monthNames = dateTimeLocalization.MonthNames.Text.Split(new [] {','}, StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToArray();
+
+    var qs = Request.QueryString;
+    var year = qs.Get("year");
+    var month = qs.Get("month");
+
+    string selected = "";
+    
+    if (!string.IsNullOrEmpty(year) && !string.IsNullOrEmpty(month))
+    {
+        selected = Url.BlogArchiveMonth((BlogPart)Model.Blog, int.Parse(year), int.Parse(month));
+    }
+    else if (!string.IsNullOrEmpty(year))
+    {
+        selected = Url.BlogArchiveYear((BlogPart)Model.Blog, int.Parse(year));
+    }
+
+    string blogName = Request.Path.Contains(@"news-blog/blog") ? "Blog" : "News";
+
+}
+@Html.Hidden("blogName", blogName)
+
+<label for="date">Date</label>
+@*select list of dates *@
+@if (archives.Count() > 12)
+{
+ 
+    var selectList = archives.Take(12).Select(x => new SelectListItem
+    {
+        Text = string.Format("{0} {1}", monthNames[x.Key.ToDateTime().Month - 1], x.Key.ToDateTime().Year),
+        Value = Url.BlogArchiveMonth((BlogPart)Model.Blog, x.Key.Year, x.Key.Month),
+        Selected = Url.BlogArchiveMonth((BlogPart)Model.Blog, x.Key.Year, x.Key.Month) == selected
+    }).ToList();
+
+    var years = archives.Skip(12).GroupBy(x => x.Key.ToDateTime().Year).Select(y => y.Key).OrderByDescending(x => x);
+    
+    selectList.AddRange(years.Select(x => new SelectListItem
+        {
+            Text = string.Format("{0}", x),
+            Value = Url.BlogArchiveYear((BlogPart)Model.Blog, x),
+            Selected = Url.BlogArchiveYear((BlogPart)Model.Blog, x) == selected
+        }));
+    
+    @Html.DropDownList("path", selectList, new { })
+    
+}
+else if (archives.Any())
+{
+    var selectList = archives.Take(12).Select(x => new SelectListItem
+    {
+        Text = string.Format("{0} {1}", monthNames[x.Key.ToDateTime().Month - 1], x.Key.ToDateTime().Year),
+        Value = Url.BlogArchiveMonth((BlogPart)Model.Blog, x.Key.Year, x.Key.Month),
+        Selected = Url.BlogArchiveMonth((BlogPart)Model.Blog, x.Key.Year, x.Key.Month) == selected
+    });
+                 
+                 
+    @Html.DropDownList("path", selectList, new { })
+                 
+}
+else
+{
+    <div class="message info">@T("None found")</div>
+}
+            
+           
+
+

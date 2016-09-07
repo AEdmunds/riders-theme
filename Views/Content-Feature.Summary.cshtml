@@ -1,0 +1,30 @@
+﻿@using Orchard.ContentManagement
+
+@{
+    var contentItems = (IEnumerable<IContent>)Model.ContentItem.Feature.LinkToContent.ContentItems;
+    
+    var title = (string) Model.ContentItem.TitlePart.Title;
+    var image = Model.ContentItem.Feature.Image;
+    var introduction = Model.ContentItem.Feature.Text.Value;
+    
+    
+    
+}
+
+    <div class="column highlight">
+        <h2 class="ribbon small">
+            <span>
+                @if (contentItems.Any()) {
+                    var linkContent = contentItems.First();
+                    @Html.ItemDisplayLink(title, linkContent)
+                }
+                else {
+                    @title
+                }
+            </span>
+        </h2>
+        <div class="image-container">
+            @Display(New.ImageField(ImageField:image))
+        </div>
+        <p>@introduction</p>
+    </div>

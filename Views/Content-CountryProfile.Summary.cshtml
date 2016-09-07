@@ -1,0 +1,47 @@
+﻿@using Orchard.ContentManagement
+@using OrangeCheck.Utils
+@{
+    if (Model.Title != null) {
+        Layout.Title = Model.Title;
+    }
+
+    //Model.Classes.Add("highlight");
+    
+    ContentItem contentItem = Model.ContentItem;
+    
+    var cp = Model.ContentItem.CountryProfile;
+    
+    var title = Model.ContentItem.TitlePart.Title;
+    var id = "info-" + title.ToString().Replace(" ", "-");
+    var text = cp.IntroductionText.Value;
+        
+    var html = text == null ? String.Empty : "<p>" + text.ToString().Replace(Environment.NewLine, "</p><p>") + "<p>" ;
+    
+    string link = "Read more about our work in " + title + " >";
+    
+    //var imgTechnicians = string.IsNullOrEmpty(cp.SummaryTechniciansImage.ImageUrl) ? string.Empty : @Url.Content(cp.SummaryTechniciansImage.ImagePath);
+    //var imgWorkshops = string.IsNullOrEmpty(cp.SummaryWorkshopImage.ImageUrl) ? string.Empty : @Url.Content(cp.SummaryWorkshopImage.ImagePath);
+    //var imgKmPerMonth = string.IsNullOrEmpty(cp.SummaryKmPmImage.ImageUrl) ? string.Empty : @Url.Content(cp.SummaryKmPmImage.ImagePath);
+    //var imgLivesTouched = string.IsNullOrEmpty(cp.SummaryLivesTouchedImage.ImageUrl) ? string.Empty : @Url.Content(cp.SummaryLivesTouchedImage.ImagePath);
+    
+    WorkContext.Layout.AfterContent.Add(
+        New.CountrySummaryStats(
+            Title: Model.ContentItem.TitlePart.Title,
+            Start: T(string.Format("{0} program started", Model.ContentItem.TitlePart.Title)),
+            Year: cp.YearStarted.Value,
+            Technicians: cp.Technicians.Value,
+            Workshops: cp.Workshops.Value,
+            KPerMonth: cp.KmPerMonth.Value + "k",
+            LivesTouched: cp.LivesTouched.Value + "m"         
+            ), "5");
+   
+}
+       
+<div id="@id">
+	<h2>@title</h2>
+    @Html.Raw(html)
+    @Html.ItemDisplayLink(link, contentItem)
+    @*@Html.ItemDisplayLink(link, contentItem, new { @class="highlight" })*@
+    
+</div>
+

@@ -1,0 +1,33 @@
+﻿@using Orchard.ContentManagement
+@{
+    
+    var title = Model.ContentItem.WidgetPart.Title;
+    var image = Model.ContentItem.VanillaPart.Photo;
+    
+    var contentItems = (IEnumerable<IContent>)Model.ContentItem.VanillaPart.Link.ContentItems;
+
+    var body = Model.ContentItem.VanillaPart.Standfirst.Value;
+}
+
+@if (contentItems.Any())
+{
+    var linkContent = contentItems.First();
+    <a href="@Url.ItemDisplayUrl(linkContent)">
+        <div class="block case-study">
+            <h2 class="ribbon small"><span>@title</span></h2>
+            
+                   @Display(New.ImageField(ImageField:image))
+            
+            <p>@body</p>
+        </div>
+    </a>
+}
+else
+{
+    <div class="block case-study">
+        <h2 class="ribbon small"><span>@title</span></h2>
+        @Display(New.ImageField(ImageField:image))
+        <p>@body</p>
+    </div>
+    
+}

@@ -1,0 +1,18 @@
+﻿@using Orchard.ContentManagement
+@{
+
+    var image = Model.ContentItem.Award.Image;
+    var title = Model.ContentItem.TitlePart.Title;
+    var body = Model.ContentItem.BodyPart.Text;
+    
+
+}
+
+
+<li>							
+	<div class="image-container">
+		@Display(New.ImageField(ImageField:image))
+	</div>
+	<h3>@title</h3>
+	<p>@body</p>
+</li>
